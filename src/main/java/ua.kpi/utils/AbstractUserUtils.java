@@ -2,7 +2,7 @@ package ua.kpi.utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.kpi.model.dao.Mapper.ClientUserMapper;
+import ua.kpi.model.dao.Mapper.AbstractUserMapper;
 import ua.kpi.model.entities.AbstractAppUser;
 import ua.kpi.model.dao.impl.user.UserDao;
 import ua.kpi.model.entities.ClientUser;
@@ -16,7 +16,7 @@ public class AbstractUserUtils implements UserDao {
     private static final String COUNT = "count";
     private static final Logger LOGGER = LogManager.getLogger(AbstractUserUtils.class);
 
-   ClientUserMapper userMapper = new ClientUserMapper(); //TODO consider generic version to add inspector
+   AbstractUserMapper userMapper = new AbstractUserMapper(); //TODO consider generic version to add inspector
     Connection connection;
 
     public AbstractUserUtils(Connection connection) {
@@ -85,7 +85,6 @@ public class AbstractUserUtils implements UserDao {
                 //user = userMapper.makeUnique(users, user); TODO+ validate use
                 return user;
             }
-
         } catch (SQLException exception) {
             LOGGER.error("Error while getting a user from database");
             exception.printStackTrace();
@@ -102,7 +101,7 @@ public class AbstractUserUtils implements UserDao {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) { //TODO+ duplicate values possible?
-                ClientUser user = userMapper.extractFromResultSet(rs);
+                ClientUser user = (ClientUser) userMapper.extractFromResultSet(rs);
                 return user;
             }
         } catch (SQLException exception) {

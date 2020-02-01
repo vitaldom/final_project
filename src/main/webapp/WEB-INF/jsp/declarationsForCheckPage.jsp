@@ -2,15 +2,15 @@
 
 <html>
 <head>
-    <title>SubmittedDeclarationsPage</title>
+    <title>DeclarationsForCheckPage</title>
     <link rel="icon" href="data:,">
 </head>
 <body>
 
-<h2><fmt:message key="submitted.declarations.page.header" /></h2>
+<h2><fmt:message key="declarations.for.check.header" /></h2>
 
 <div>
-    <h4><fmt:message key="client.menu.logged.as" /></h4>
+    <h4><fmt:message key="inspector.menu.logged.as" /></h4>
     <p><c:out value="${sessionScope.user.firstName}" />&nbsp;<c:out value="${sessionScope.user.secondName}" /></p>
 </div>
 <hr>
@@ -21,7 +21,7 @@
         <th style="min-width: 150px;"><fmt:message key="submitted.declarations.table.author" /></th>
         <th style="min-width: 150px;"><fmt:message key="submitted.declarations.table.year" /></th>
         <th style="min-width: 150px;"><fmt:message key="submitted.declarations.table.status" /></th>
-        <th style="min-width: 150px;"><fmt:message key="submitted.declarations.table.view" /></th>
+        <th style="min-width: 150px;"><fmt:message key="declarations.for.check.check" /></th>
     </tr>
 
     <c:forEach items="${sessionScope.declarationList}" var="declaration">
@@ -40,7 +40,7 @@
                 <fmt:message key="${declaration.status.resourceBundleKey}" />
             </td>
             <td style="padding: 15px 0; border: 1px solid;">
-                <form action="${pageContext.request.contextPath}/singleDeclaration" method="POST">
+                <form action="${pageContext.request.contextPath}/checkDeclaration" method="POST">
                     <input type="hidden" name="declaration_id" value="${declaration.id}">
                     <button type="submit" id="button-submit"><fmt:message key="submitted.declarations.view.declaration.button" /></button>
                 </form>

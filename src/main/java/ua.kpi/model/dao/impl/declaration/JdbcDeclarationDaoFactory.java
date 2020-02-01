@@ -20,17 +20,17 @@ public class JdbcDeclarationDaoFactory extends DeclarationDaoFactory {
 //    public DeclarationDao delete() {
 //        return new DeclarationUtils(getConnection());
 //    }
-//
-//    @Override
-//    public DeclarationDao find() {
-//        return new DeclarationUtils(getConnection());
-//    }
-//
+
 //    @Override
 //    public DeclarationDao update() {
 //        return new DeclarationUtils(getConnection());
 //    }
-//
+
+    @Override
+    public DeclarationDao findAllByInspectorLogin() {
+        return new DeclarationUtils(getConnection());
+    }
+
     @Override
     public DeclarationDao findAllByClientLogin() {
         return new DeclarationUtils(getConnection());

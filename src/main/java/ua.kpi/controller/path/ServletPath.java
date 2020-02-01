@@ -9,5 +9,8 @@ public final class ServletPath {
     public static final String NEW_DECLARATION = "/newDeclaration";
     public static final String SUBMITTED_DECLARATIONS = "/submittedDeclarations";
     public static final String VIEW_SINGLE_DECLARATION = "/singleDeclaration";
+    public static final String VIEW_DECLARATIONS_FOR_CHECK = "/declarationsForCheck";
+    public static final String CHECK_DECLARATION = "/checkDeclaration";
+
 }
 

@@ -125,11 +125,33 @@ public class Declaration {
     }
 
     public enum TaxCategory {
-        PREFERENTIAL, EMPLOYEE, ENTREPRENEUR
+        PREFERENTIAL("new.declaration.preferential.tax"),
+        EMPLOYEE("new.declaration.employee.tax"), ENTREPRENEUR(("new.declaration.entrepreneur.tax"));
+
+        private final String resourceBundleKey;
+
+        TaxCategory(String resourceBundleKey) {
+            this.resourceBundleKey = resourceBundleKey;
+        }
+
+        public String getResourceBundleKey() {
+            return resourceBundleKey;
+        }
     }
 
     public enum Status {
-        SUBMITTED, UNDER_REVISION, UNDER_CORRECTION, APPROVED
+        SUBMITTED("status.submitted"), UNDER_CORRECTION("status.under.correction"),
+        APPROVED("status.approved");
+
+        private final String resourceBundleKey;
+
+        Status(String resourceBundleKey) {
+            this.resourceBundleKey = resourceBundleKey;
+        }
+
+        public String getResourceBundleKey() {
+            return resourceBundleKey;
+        }
     }
                                                                             //Builder
     private Declaration(Builder builder) {

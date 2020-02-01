@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface DeclarationDao extends GenericDao<Declaration> {
 //    Declaration find(int id); TODO+ validate use or delete
-    List<Declaration> findAllByClientLogin(String login);
+    List<Declaration> findAllByClientLogin(String clientLogin);
+    List<Declaration> findAllByInspectorLogin(String inspectorLogin);
 //    void delete(int id);
 }

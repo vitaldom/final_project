@@ -7,7 +7,7 @@ public abstract class DeclarationDaoFactory {
 //    public abstract DeclarationDao delete();
 //    public abstract DeclarationDao find();
 //    public abstract DeclarationDao update();
-//    public abstract DeclarationDao findAllById();
+    public abstract DeclarationDao findAllByInspectorLogin();
     public abstract DeclarationDao create();
     public abstract DeclarationDao findAllByClientLogin();
 

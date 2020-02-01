@@ -2,13 +2,8 @@ package ua.kpi.model.dao.Mapper;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.kpi.controller.command.LoginCommand;
-import ua.kpi.model.dao.impl.columns.ClientUserSqlColumns;
 import ua.kpi.model.dao.impl.columns.DeclarationSqlColumns;
-import ua.kpi.model.entities.AbstractAppUser;
-import ua.kpi.model.entities.ClientUser;
 import ua.kpi.model.entities.Declaration;
-import ua.kpi.model.entities.InspectorUser;
 import ua.kpi.model.services.user.UserService;
 
 import java.sql.ResultSet;
@@ -38,7 +33,7 @@ public class DeclarationMapper implements Mapper<Declaration> {
 
         UserService userService = new UserService();
                                                                                                 //Setting rest of fields
-        declaration.setAuthor(userService.findClientByLogin(declaration.getAuthorLogin()));
+        declaration.setAuthor(userService.findClientByLogin(declaration.getAuthorLogin())); //TODO check for universal solution
         declaration.setId(rs.getInt(DeclarationSqlColumns.ID));
         declaration.setInspectorLogin(rs.getString(DeclarationSqlColumns.INSPECTOR_LOGIN));
         declaration.setCorrectionMessage(rs.getString(DeclarationSqlColumns.CORRECTION_MESSAGE));

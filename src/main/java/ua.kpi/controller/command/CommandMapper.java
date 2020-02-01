@@ -16,6 +16,8 @@ public class CommandMapper {
         commands.put(ServletPath.NEW_DECLARATION, new CreateDeclarationCommand());
         commands.put(ServletPath.SUBMITTED_DECLARATIONS, new ViewSubmittedDeclarationsCommand());
         commands.put(ServletPath.VIEW_SINGLE_DECLARATION, new ViewSingleDeclarationCommand());
+        commands.put(ServletPath.VIEW_DECLARATIONS_FOR_CHECK, new DeclarationsForCheckCommand());
+        commands.put(ServletPath.CHECK_DECLARATION, new CheckDeclarationCommand());
 
 
 

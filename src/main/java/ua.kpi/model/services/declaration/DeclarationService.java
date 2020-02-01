@@ -15,19 +15,20 @@ public class DeclarationService {
 //                dao.delete(id);
 //            }
 //        }
-//
-//        public Declaration find(int id) {
-//            try (DeclarationDao dao = daoFactory.find()) {
-//                return dao.find(id);
-//            }
-//        }
+
 //
 //        public void update(Declaration declaration) {
 //            try(DeclarationDao dao = daoFactory.update()) {
 //                dao.update(declaration);
 //            }
 //        }
-//
+
+        public List<Declaration> findAllByInspectorLogin(String login) {
+            try(DeclarationDao dao = daoFactory.findAllByInspectorLogin()) {
+                return dao.findAllByInspectorLogin(login);
+            }
+        }
+
         public List<Declaration> findAllByClientLogin(String login) {
             try(DeclarationDao dao = daoFactory.findAllByClientLogin()) {
                 return dao.findAllByClientLogin(login);

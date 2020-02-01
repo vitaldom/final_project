@@ -2,15 +2,15 @@
 
 <html>
 <head>
-    <title>SingleDeclarationPage</title>
+    <title>CheckDeclarationPage</title>
     <link rel="icon" href="data:,">
 </head>
 <body>
 
-<h2><fmt:message key="single.declaration.page.header" /></h2>
+<h2><fmt:message key="check.declaration.page.header" /></h2>
 
 <div>
-    <h4><fmt:message key="client.menu.logged.as" /></h4>
+    <h4><fmt:message key="inspector.menu.logged.as" /></h4>
     <p><c:out value="${sessionScope.user.firstName}" />&nbsp;<c:out value="${sessionScope.user.secondName}" /></p>
 </div>
 <hr>

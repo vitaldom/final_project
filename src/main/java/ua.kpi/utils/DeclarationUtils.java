@@ -99,8 +99,30 @@ public class DeclarationUtils implements DeclarationDao {
                 }
 
             } catch (SQLException exception) {
-                LOGGER.error("SQL receiving all declaration by login {} ", exception.getMessage());
+                LOGGER.error("SQL receiving all declaration by client login {} ", exception.getMessage());
             }
+
+        return list;
+    }
+
+    @Override
+    public List<Declaration> findAllByInspectorLogin(String login) {
+        List<Declaration> list = new ArrayList<>();
+        DeclarationMapper declarationMapper = new DeclarationMapper();
+
+        try (PreparedStatement ps = connection.prepareStatement(SELECT_DECLARATIONS_BY_INSPECTOR_LOGIN)) {
+
+            ps.setString(1,login);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Declaration declaration = declarationMapper.extractFromResultSet(rs);
+                list.add(declaration);
+            }
+
+        } catch (SQLException exception) {
+            LOGGER.error("SQL receiving all declaration by inspector login {} ", exception.getMessage());
+        }
 
         return list;
     }
