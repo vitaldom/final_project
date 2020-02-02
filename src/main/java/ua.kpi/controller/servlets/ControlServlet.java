@@ -41,7 +41,7 @@ public class ControlServlet extends HttpServlet {
         //String commandPath = request.getRequestURI().replaceAll(".*/", ""); TODO validate use or delete
 
         String commandPath = request.getRequestURI();
-        System.out.println("Request URI: " + request.getRequestURI()); //TODO
+//        System.out.println("Request URI: " + request.getRequestURI()); //TODO
 
         Command command = CommandMapper.getCommand(commandPath);
         command.execute(request, response);

@@ -16,28 +16,39 @@ public class DeclarationService {
 //            }
 //        }
 
-//
 //        public void update(Declaration declaration) {
 //            try(DeclarationDao dao = daoFactory.update()) {
 //                dao.update(declaration);
 //            }
 //        }
 
-        public List<Declaration> findAllByInspectorLogin(String login) {
-            try(DeclarationDao dao = daoFactory.findAllByInspectorLogin()) {
-                return dao.findAllByInspectorLogin(login);
-            }
+    public List<Declaration> findAllByInspectorLogin(String login) {
+        try(DeclarationDao dao = daoFactory.findAllByInspectorLogin()) {
+            return dao.findAllByInspectorLogin(login);
         }
+    }
 
-        public List<Declaration> findAllByClientLogin(String login) {
-            try(DeclarationDao dao = daoFactory.findAllByClientLogin()) {
-                return dao.findAllByClientLogin(login);
-            }
+    public List<Declaration> findAllByClientLogin(String login) {
+        try(DeclarationDao dao = daoFactory.findAllByClientLogin()) {
+            return dao.findAllByClientLogin(login);
         }
+    }
 
-        public boolean create(Declaration declaration) {
-            try(DeclarationDao dao = daoFactory.create()) {
-                return dao.create(declaration);
-            }
+    public boolean create(Declaration declaration) {
+        try(DeclarationDao dao = daoFactory.create()) {
+            return dao.create(declaration);
         }
+    }
+
+    public boolean approve(int id) {
+        try(DeclarationDao dao = daoFactory.approve()) {
+            return dao.approve(id);
+        }
+    }
+
+    public boolean decline(int id, String declineMessage) {
+        try(DeclarationDao dao = daoFactory.decline()) {
+            return dao.decline(id, declineMessage);
+        }
+    }
 }

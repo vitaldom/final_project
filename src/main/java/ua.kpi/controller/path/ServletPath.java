@@ -11,6 +11,9 @@ public final class ServletPath {
     public static final String VIEW_SINGLE_DECLARATION = "/singleDeclaration";
     public static final String VIEW_DECLARATIONS_FOR_CHECK = "/declarationsForCheck";
     public static final String CHECK_DECLARATION = "/checkDeclaration";
+    public static final String APPROVE_DECLARATION = "/approveDeclaration";
+    public static final String DECLINE_DECLARATION = "/declineDeclaration";
+    public static final String CORRECT_DECLARATION = "/correctDeclaration";
 
 }
 

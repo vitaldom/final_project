@@ -22,9 +22,11 @@
         <th style="min-width: 150px;"><fmt:message key="submitted.declarations.table.year" /></th>
         <th style="min-width: 150px;"><fmt:message key="submitted.declarations.table.status" /></th>
         <th style="min-width: 150px;"><fmt:message key="submitted.declarations.table.view" /></th>
+        <th style="min-width: 150px;"><fmt:message key="submitted.declarations.table.correction" /></th>
+
     </tr>
 
-    <c:forEach items="${sessionScope.declarationList}" var="declaration">
+    <c:forEach items="${sessionScope.declarationList}" var="declaration" varStatus="varStatus">
         <tr style="padding-bottom: 20px; text-align: center">
             <td style="padding: 15px 0; border: 1px solid;">
                 <c:out value="${declaration.id}" />
@@ -41,10 +43,19 @@
             </td>
             <td style="padding: 15px 0; border: 1px solid;">
                 <form action="${pageContext.request.contextPath}/singleDeclaration" method="POST">
-                    <input type="hidden" name="declaration_id" value="${declaration.id}">
+                        <input type="hidden" name="decIndexInArray" value="${varStatus.index}">
                     <button type="submit" id="button-submit"><fmt:message key="submitted.declarations.view.declaration.button" /></button>
                 </form>
             </td>
+            <td>
+                <c:if test="${declaration.status == 'UNDER_CORRECTION'}">
+                    <form action="${pageContext.request.contextPath}/correctDeclaration" method="POST">
+                        <input type="hidden" name="decIndexInArray" value="${varStatus.index}">
+                        <button type="submit" ><fmt:message key="submitted.declarations.correct.button" /></button>
+                    </form>
+                </c:if>
+            </td>
+
         </tr>
     </c:forEach>
 </table>

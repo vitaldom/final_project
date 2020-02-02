@@ -14,7 +14,12 @@ public interface UserSqlQueries {
     String CREATE_DECLARATION = "INSERT INTO declarations(id, author_login, inspector_login, declaration_year, " +
             "tax_category, income, tax_sum_declared, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     String SELECT_DECLARATIONS_BY_CLIENT_LOGIN = "SELECT * FROM declarations WHERE author_login = ?";
-    String SELECT_DECLARATIONS_BY_INSPECTOR_LOGIN = "SELECT * FROM declarations WHERE inspector_login = ?";
+    String SELECT_DECLARATIONS_BY_INSPECTOR_LOGIN = "SELECT * FROM declarations WHERE inspector_login = ? AND status = 'SUBMITTED'";
+    String APPROVE_DECLARATION = "UPDATE declarations SET status = 'APPROVED' WHERE id = ?";
+    String DECLINE_DECLARATION = "UPDATE declarations SET status = 'UNDER_CORRECTION', correction_message = ? WHERE id = ?";
+    String FIND_DECLARATION_BY_ID = "SELECT * FROM declarations WHERE id = ?";
+
+
 
     String FIND_CLIENT_BY_LOGIN = "SELECT second_name, first_name, login, password, role FROM users WHERE login = ?"; //todo delete role
 

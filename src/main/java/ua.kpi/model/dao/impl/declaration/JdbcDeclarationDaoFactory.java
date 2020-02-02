@@ -26,6 +26,17 @@ public class JdbcDeclarationDaoFactory extends DeclarationDaoFactory {
 //        return new DeclarationUtils(getConnection());
 //    }
 
+
+    @Override
+    public DeclarationDao approve() {
+        return new DeclarationUtils(getConnection());
+    }
+
+    @Override
+    public DeclarationDao decline() {
+        return new DeclarationUtils(getConnection());
+    }
+
     @Override
     public DeclarationDao findAllByInspectorLogin() {
         return new DeclarationUtils(getConnection());

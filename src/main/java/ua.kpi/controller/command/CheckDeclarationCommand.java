@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CheckDeclarationCommand implements Command {
@@ -18,19 +19,15 @@ public class CheckDeclarationCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-            Declaration declarationToShow = null; //TODO avoid assigning to null
-            int id = Integer.parseInt(request.getParameter("declaration_id")); //TODO add checks for these operations.
-                                                                                    //TODO possibly write to session
+        if (request.getParameter("decIndexInArray") == null) {        //on-page language change case
+            forward(request, response, JspPath.CHECK_DECLARATION_PAGE);
+        }
 
-            List<Declaration> declarationList = (List<Declaration>) request.getSession().getAttribute("declarationList");
+        int index = Integer.parseInt(request.getParameter("decIndexInArray")); //TODO add checks for these operations.
+        ArrayList<Declaration> declarationList = (ArrayList<Declaration>) request.getSession().getAttribute("declarationList");
+        Declaration declarationToProceed = declarationList.get(index);
 
-            for (Declaration s : declarationList) {
-                if (s.getId() == id) {
-                    declarationToShow = s;
-                }
-            }
-
-        request.setAttribute("declarationToShow", declarationToShow);
+        request.getSession().setAttribute("declarationToProceed", declarationToProceed);
 
         forward(request, response, JspPath.CHECK_DECLARATION_PAGE);
     }

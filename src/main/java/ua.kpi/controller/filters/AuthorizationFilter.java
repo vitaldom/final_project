@@ -33,7 +33,7 @@ public class AuthorizationFilter implements Filter {
 
         //TODO add body
         String requestedUri = request.getRequestURI();
-        LOGGER.debug("Requested URI in Authorization filter: {}", requestedUri); //TODO
+//        LOGGER.debug("Requested URI in Authorization filter: {}", requestedUri); //TODO
 
 
 

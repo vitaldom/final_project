@@ -10,6 +10,8 @@ public abstract class DeclarationDaoFactory {
     public abstract DeclarationDao findAllByInspectorLogin();
     public abstract DeclarationDao create();
     public abstract DeclarationDao findAllByClientLogin();
+    public abstract DeclarationDao approve();
+    public abstract DeclarationDao decline();
 
 
     public static DeclarationDaoFactory getInstance(){

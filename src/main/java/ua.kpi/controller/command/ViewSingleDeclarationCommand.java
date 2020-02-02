@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewSingleDeclarationCommand implements Command {
@@ -18,18 +19,17 @@ public class ViewSingleDeclarationCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-            Declaration declarationToShow = null; //TODO avoid assigning to null
-            int id = Integer.parseInt(request.getParameter("declaration_id")); //TODO add checks for these operations
+        if (request.getParameter("decIndexInArray") == null) {        //on-page language change case
+            forward(request, response, JspPath.SINGLE_DECLARATION_PAGE);
+        }
 
-            List<Declaration> declarationList = (List<Declaration>) request.getSession().getAttribute("declarationList");
+        int index = Integer.parseInt(request.getParameter("decIndexInArray"));
 
-            for (Declaration s : declarationList) {
-                if (s.getId() == id) {
-                    declarationToShow = s;
-                }
-            }
+        ArrayList<Declaration> declarationList = (ArrayList<Declaration>) request.getSession().getAttribute("declarationList");
 
-        request.setAttribute("declarationToShow", declarationToShow);
+        Declaration declarationToShow = declarationList.get(index);
+
+        request.getSession().setAttribute("declarationToShow", declarationToShow);
 
         forward(request, response, JspPath.SINGLE_DECLARATION_PAGE);
     }

@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.kpi.model.dao.Mapper.DeclarationMapper;
 import ua.kpi.model.dao.impl.declaration.DeclarationDao;
+import ua.kpi.model.dao.impl.sqlqueries.UserSqlQueries;
 import ua.kpi.model.entities.Declaration;
 
 import java.sql.*;
@@ -125,6 +126,34 @@ public class DeclarationUtils implements DeclarationDao {
         }
 
         return list;
+    }
+
+    @Override
+    public boolean approve(int id) {
+        try (PreparedStatement statement = connection.prepareStatement(UserSqlQueries.APPROVE_DECLARATION)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException exception) {
+            LOGGER.error("Error approving declaration: {} ", exception.getMessage());
+            exception.printStackTrace();
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean decline(int id, String declineMessage) {
+        try (PreparedStatement statement = connection.prepareStatement(UserSqlQueries.DECLINE_DECLARATION)) {
+            statement.setInt(2, id);
+            statement.setString(1, declineMessage);
+
+            statement.executeUpdate();
+        } catch (SQLException exception) {
+            LOGGER.error("Error declining declaration: {} ", exception.getMessage());
+            exception.printStackTrace();
+        }
+
+        return true;
     }
 
     @Override
