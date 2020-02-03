@@ -52,6 +52,11 @@ public class JdbcDeclarationDaoFactory extends DeclarationDaoFactory {
         return new DeclarationUtils(getConnection());
     }
 
+    @Override
+    public DeclarationDao correct()  {
+        return new DeclarationUtils(getConnection());
+    }
+
     private Connection getConnection(){
 
         try {

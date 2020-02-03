@@ -2,11 +2,8 @@ package ua.kpi.controller.command;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.kpi.controller.path.JspPath;
 import ua.kpi.controller.path.ServletPath;
-import ua.kpi.model.InputChecker;
 import ua.kpi.model.entities.AbstractAppUser;
-import ua.kpi.model.entities.ClientUser;
 import ua.kpi.model.services.user.UserService;
 
 import javax.servlet.ServletException;
@@ -16,7 +13,6 @@ import java.io.IOException;
 import java.util.*;
 
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
-import static ua.kpi.controller.path.JspPath.REGISTRATION_PAGE;
 
 
 public class LoginCommand implements Command {

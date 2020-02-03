@@ -12,6 +12,7 @@ public abstract class DeclarationDaoFactory {
     public abstract DeclarationDao findAllByClientLogin();
     public abstract DeclarationDao approve();
     public abstract DeclarationDao decline();
+    public abstract DeclarationDao correct();
 
 
     public static DeclarationDaoFactory getInstance(){

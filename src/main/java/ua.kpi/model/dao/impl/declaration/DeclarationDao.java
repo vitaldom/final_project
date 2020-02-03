@@ -11,5 +11,6 @@ public interface DeclarationDao extends GenericDao<Declaration> {
     List<Declaration> findAllByInspectorLogin(String inspectorLogin);
     boolean approve(int id);
     boolean decline(int id, String declineMessage);
+    boolean correct(Declaration correctedDeclaration);
 //    void delete(int id);
 }

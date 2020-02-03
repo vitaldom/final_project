@@ -157,6 +157,28 @@ public class DeclarationUtils implements DeclarationDao {
     }
 
     @Override
+    public boolean correct(Declaration correctedDeclaration) {
+        try (PreparedStatement ps = connection.prepareStatement(CORRECT_DECLARATION)) {
+
+            ps.setString(1, correctedDeclaration.getDeclarationYear().getYear());
+            ps.setString(2, correctedDeclaration.getTaxCategory().toString());
+            ps.setLong(3, correctedDeclaration.getIncome());
+            ps.setLong(4, correctedDeclaration.getTaxSumDeclared());
+            ps.setString(5, correctedDeclaration.getStatus().toString());
+            ps.setInt(6, correctedDeclaration.getId());
+            ps.executeUpdate();
+
+        } catch (SQLException exception) {
+            LOGGER.error("SQL error correcting declaration {} ", exception.getMessage());
+            exception.printStackTrace();
+        }
+
+        return true;
+    }
+
+
+
+    @Override
     public void close() {
         try {
             connection.close();

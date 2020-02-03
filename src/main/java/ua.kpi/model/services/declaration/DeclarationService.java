@@ -51,4 +51,10 @@ public class DeclarationService {
             return dao.decline(id, declineMessage);
         }
     }
+
+    public boolean correct(Declaration correctedDeclaration) {
+        try(DeclarationDao dao = daoFactory.correct()) {
+            return dao.correct(correctedDeclaration);
+        }
+    }
 }

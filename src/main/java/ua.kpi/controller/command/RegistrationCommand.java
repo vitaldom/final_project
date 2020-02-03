@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.kpi.controller.path.JspPath;
 import ua.kpi.controller.path.ServletPath;
-import ua.kpi.model.InputChecker;
+import ua.kpi.controller.inputcheck.InputChecker;
 import ua.kpi.model.entities.AbstractAppUser;
 import ua.kpi.model.entities.ClientUser;
 import ua.kpi.model.services.user.UserService;

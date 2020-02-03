@@ -17,6 +17,8 @@ public interface UserSqlQueries {
     String SELECT_DECLARATIONS_BY_INSPECTOR_LOGIN = "SELECT * FROM declarations WHERE inspector_login = ? AND status = 'SUBMITTED'";
     String APPROVE_DECLARATION = "UPDATE declarations SET status = 'APPROVED' WHERE id = ?";
     String DECLINE_DECLARATION = "UPDATE declarations SET status = 'UNDER_CORRECTION', correction_message = ? WHERE id = ?";
+    String CORRECT_DECLARATION = "UPDATE declarations SET declaration_year = ?, tax_category = ?, income = ?," +
+            " tax_sum_declared = ?, status = ? WHERE  id = ?";
     String FIND_DECLARATION_BY_ID = "SELECT * FROM declarations WHERE id = ?";
 
 

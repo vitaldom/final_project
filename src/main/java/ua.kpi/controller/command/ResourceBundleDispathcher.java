@@ -12,7 +12,7 @@ public class ResourceBundleDispathcher {
     static final ResourceBundle interfaceEnglish = ResourceBundle.getBundle("web interface", new Locale("en"));
    //TODO check for quality of solution. Consider making name of resource bundle as constant
 
-    static ResourceBundle getResourceBundle(HttpServletRequest request) {
+    public static ResourceBundle getResourceBundle(HttpServletRequest request) {
         String userLanguage = (String) request.getSession().getAttribute("sessionLang");
 
         return userLanguage.equals("uk") ? interfaceUkrainian : interfaceEnglish;

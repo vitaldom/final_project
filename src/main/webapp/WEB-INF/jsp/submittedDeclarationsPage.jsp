@@ -47,9 +47,9 @@
                     <button type="submit" id="button-submit"><fmt:message key="submitted.declarations.view.declaration.button" /></button>
                 </form>
             </td>
-            <td>
+            <td style="padding: 15px 0; border: 1px solid;">
                 <c:if test="${declaration.status == 'UNDER_CORRECTION'}">
-                    <form action="${pageContext.request.contextPath}/correctDeclaration" method="POST">
+                    <form action="${pageContext.request.contextPath}/declinedDeclaration" method="POST">
                         <input type="hidden" name="decIndexInArray" value="${varStatus.index}">
                         <button type="submit" ><fmt:message key="submitted.declarations.correct.button" /></button>
                     </form>
