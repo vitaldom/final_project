@@ -76,6 +76,14 @@
         </tr>
     </table>
 </form>
+<hr>
+
+<form action="${pageContext.request.contextPath}/inspectorChangeRequest" method="post">
+    <input style="width: 500px; height: 100px" required type="text" name="inspectorChangeComment"
+           placeholder="<fmt:message key="correct.declaration.inspector.change.comment" />" />
+    <button type="submit" id="button-decline"><fmt:message key="correct.declaration.inspector.change.button" /></button>
+</form>
+<hr>
 
 </body>
 </html>

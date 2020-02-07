@@ -22,6 +22,9 @@ public class CommandMapper {
         commands.put(ServletPath.DECLINE_DECLARATION, new DeclineDeclarationCommand());
         commands.put(ServletPath.VIEW_DECLINED_DECLARATION, new ViewDeclinedDeclarationCommand());
         commands.put(ServletPath.CORRECT_DECLARATION, new CorrectDeclarationCommand());
+        commands.put(ServletPath.REQUEST_INSPECTOR_CHANGE, new InspectorChangeCommand());
+
+
 
 
 

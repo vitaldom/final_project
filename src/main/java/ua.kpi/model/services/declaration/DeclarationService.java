@@ -40,9 +40,9 @@ public class DeclarationService {
         }
     }
 
-    public boolean approve(int id) {
+    public boolean changeStatus(int id, String newStatus) {
         try(DeclarationDao dao = daoFactory.approve()) {
-            return dao.approve(id);
+            return dao.changeStatus(id, newStatus);
         }
     }
 

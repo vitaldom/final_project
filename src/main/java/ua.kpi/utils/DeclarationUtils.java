@@ -129,10 +129,13 @@ public class DeclarationUtils implements DeclarationDao {
     }
 
     @Override
-    public boolean approve(int id) {
-        try (PreparedStatement statement = connection.prepareStatement(UserSqlQueries.APPROVE_DECLARATION)) {
-            statement.setInt(1, id);
+    public boolean changeStatus(int id, String newStatus) {
+        try (PreparedStatement statement = connection.prepareStatement(UserSqlQueries.CHANGE_DECLARATION_STATUS)) {
+
+            statement.setInt(2, id);
+            statement.setString(1, newStatus);
             statement.executeUpdate();
+
         } catch (SQLException exception) {
             LOGGER.error("Error approving declaration: {} ", exception.getMessage());
             exception.printStackTrace();
@@ -175,8 +178,6 @@ public class DeclarationUtils implements DeclarationDao {
 
         return true;
     }
-
-
 
     @Override
     public void close() {

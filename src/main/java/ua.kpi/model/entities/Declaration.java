@@ -141,7 +141,7 @@ public class Declaration {
 
     public enum Status {
         SUBMITTED("status.submitted"), UNDER_CORRECTION("status.under.correction"),
-        APPROVED("status.approved");
+        APPROVED("status.approved"), APPEALED("status.appealed");
 
         private final String resourceBundleKey;
 
