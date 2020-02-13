@@ -17,7 +17,7 @@ public class SessionLocaleFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
@@ -40,7 +40,7 @@ public class SessionLocaleFilter implements Filter {
 
         //LOGGER.debug("sessionLang = {}", language); //TODO
 
-        chain.doFilter(request, response);
+        filterChain.doFilter(request, response);
     }
 
     public void destroy() {

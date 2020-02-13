@@ -12,3 +12,8 @@
     <button name="lang" type="submit" value="en" ${lang == 'en' ? 'selected' : ' '}>English</button>
 </form>
 <hr>
+
+<form action="${pageContext.request.contextPath}/logout">
+    <p><input type="submit" value="<fmt:message key="logout.button" />"></p>
+</form>
+<hr>

@@ -1,7 +1,7 @@
 package ua.kpi.controller.path;
 
 public class JspPath {
-//    public static final String WELCOME_PAGE = "/WEB-INF/index.jsp"; TODO
+    public static final String INDEX_PAGE = "/WEB-INF/index.jsp";
     public static final String REGISTRATION_PAGE = "/WEB-INF/jsp/userRegistration.jsp";
     public static final String CLIENT_MENU_PAGE = "/WEB-INF/jsp/clientMenuPage.jsp";
     public static final String INSPECTOR_MENU_PAGE = "/WEB-INF/jsp/inspectorMenuPage.jsp";

@@ -16,6 +16,7 @@ public final class ServletPath {
     public static final String VIEW_DECLINED_DECLARATION = "/declinedDeclaration";
     public static final String CORRECT_DECLARATION = "/correctDeclaration";
     public static final String REQUEST_INSPECTOR_CHANGE = "/inspectorChangeRequest";
+    public static final String LOGOUT = "/logout";
 
 
 }

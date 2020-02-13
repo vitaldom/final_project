@@ -33,5 +33,4 @@ public class RoleMenuCommand implements Command {
 
             forward(request, response, path.get(user.getRole()));
         }
-
 }

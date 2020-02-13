@@ -4,6 +4,10 @@ package ua.kpi.controller.filters;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.kpi.controller.inputcheck.InputChecker;
+import ua.kpi.controller.path.JspPath;
+import ua.kpi.controller.path.ServletPath;
+import ua.kpi.model.entities.AbstractAppUser;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -18,11 +22,12 @@ public class AuthorizationFilter implements Filter {
 
     Logger LOGGER = LogManager.getLogger(AuthorizationFilter.class);
 
+    private static final Set<String> LOGGED_USERS = new HashSet<>();
+
     @Override
     public void init(FilterConfig config) throws ServletException {
         ServletContext context = config.getServletContext();
-        Set<String> loggedUsers = new HashSet<>();
-        context.setAttribute("loggedUsers", loggedUsers);
+        context.setAttribute("loggedUsers", LOGGED_USERS);
     }
 
     @Override
@@ -31,13 +36,32 @@ public class AuthorizationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
 
-        //TODO add body
         String requestedUri = request.getRequestURI();
-//        LOGGER.debug("Requested URI in Authorization filter: {}", requestedUri); //TODO
+        LOGGER.debug("Requested URI in Authorization filter: {}", requestedUri); //TODO
+//        LOGGER.debug("Logged users: {}", LOGGED_USERS); //TODO
 
+        if (requestedUri.equals(ServletPath.START_PAGE)
+                || requestedUri.equals(ServletPath.REGISTRATION)
+                || requestedUri.equals(ServletPath.LOGIN)) {
+            filterChain.doFilter(request, response);
 
+        } else if (checkAccessRights(request)) {
+            filterChain.doFilter(request, response);
 
-        filterChain.doFilter(request, response);
+        } else {
+            InputChecker.setServiceMessage(request, "access.error");
+            response.sendRedirect(ServletPath.START_PAGE);
+        }
+    }
+
+    boolean checkAccessRights(HttpServletRequest request) {
+        AbstractAppUser user = (AbstractAppUser) request.getSession().getAttribute("user");
+        if (user == null) {
+            return false;
+        }
+        String login = user.getLogin();
+
+        return LOGGED_USERS.contains(login);
     }
 
     @Override
