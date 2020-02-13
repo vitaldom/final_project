@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>SingleDeclarationPage</title>
+    <title>Tax Declaration app - <fmt:message key="single.declaration.page.header" /></title>
     <link rel="icon" href="data:,">
 </head>
 <body>

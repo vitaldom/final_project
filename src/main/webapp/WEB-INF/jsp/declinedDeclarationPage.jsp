@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>CorrectDeclarationPage</title>
+    <title>Tax Declaration app - <fmt:message key="correct.declaration.page.header" /></title>
     <link rel="icon" href="data:,">
 </head>
 

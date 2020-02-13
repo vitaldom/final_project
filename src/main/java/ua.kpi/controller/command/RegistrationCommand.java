@@ -13,8 +13,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
 import static ua.kpi.controller.path.JspPath.REGISTRATION_PAGE;
@@ -31,41 +29,34 @@ public class RegistrationCommand implements Command {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-//
         if (!allNotNull(firstName, secondName, login, password)) { //TODO add error message
             forward(request, response, JspPath.REGISTRATION_PAGE);
             return;
         }
 
         String userLanguage = (String) request.getSession().getAttribute("sessionLang"); //TODO
-        Locale locale = new Locale(userLanguage);
-        ResourceBundle errorMessages = ResourceBundle.getBundle("web interface", locale);
 
-        LOGGER.debug("User first name before check: {} ", firstName);
-        LOGGER.debug("User Locale before check: {} ", locale);
         if(!InputChecker.nameIsValid(firstName, userLanguage)) {
-            request.setAttribute("error_message", errorMessages.getString("registration.invalid.first.name"));
-            forward(request, response, JspPath.REGISTRATION_PAGE);
+            InputChecker.setSessionErrorMessage(request, "registration.invalid.first.name");
+            response.sendRedirect(ServletPath.REGISTRATION);
             return;
         }
 
-        LOGGER.debug("User second name before check: {} ", secondName);
-        LOGGER.debug("User Locale before check: {} ", locale);
         if(!InputChecker.nameIsValid(secondName, userLanguage)) {
-            request.setAttribute("error_message", errorMessages.getString("registration.invalid.second.name"));
-            forward(request, response, JspPath.REGISTRATION_PAGE);
+            InputChecker.setSessionErrorMessage(request,"registration.invalid.second.name");
+            response.sendRedirect(ServletPath.REGISTRATION);
             return;
         }
 
         if(!InputChecker.loginIsValid(login)) {
-            request.setAttribute("error_message", errorMessages.getString("registration.invalid.login"));
-            forward(request, response, JspPath.REGISTRATION_PAGE);
+            InputChecker.setSessionErrorMessage(request,"registration.invalid.login");
+            response.sendRedirect(ServletPath.REGISTRATION);
             return;
         }
 
         if(!InputChecker.passwordIsValid(password)) {
-            request.setAttribute("error_message", errorMessages.getString("registration.invalid.password"));
-            forward(request, response, JspPath.REGISTRATION_PAGE);
+            InputChecker.setSessionErrorMessage(request,"registration.invalid.password");
+            response.sendRedirect(ServletPath.REGISTRATION);
             return;
         }
         //TODO check for duplicate login!
@@ -73,7 +64,6 @@ public class RegistrationCommand implements Command {
         AbstractAppUser user = new ClientUser(firstName, secondName, login, password);
         UserService userService = new UserService();
 
-//        try {
          boolean tmp = userService.create(user); //TODO consider use of tmp
          AbstractAppUser registeredUser = userService.find(login, password);
 
@@ -81,16 +71,11 @@ public class RegistrationCommand implements Command {
              LOGGER.info("Registration failed for user: {} ", user);
          } else {
              LOGGER.info("New user created: {}", registeredUser);
-             request.getSession().setAttribute("service_message",
-                     errorMessages.getString("registration.successful.registration"));
+             InputChecker.setServiceMessage(request, "registration.successful.registration");
              redirect(request, response, ServletPath.START_PAGE);
              return;
          }
-////        }
-//////        catch (LoginExistsException exception) {
-//////            request.setAttribute("error_message", errorMessages.getString("registration.login.already.exists"));
-//////            LOGGER.info("New user registration failed because login already exists : {}", login);
-//    }
+
         forward(request, response, REGISTRATION_PAGE);
     }
 }

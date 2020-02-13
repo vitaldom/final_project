@@ -13,7 +13,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
 
@@ -51,20 +50,18 @@ public class CreateDeclarationCommand implements Command {
 
         LOGGER.debug("New declaration object created: {} ", declaration.toString());
 
-
         DeclarationService declarationService = new DeclarationService();
         boolean tmp = declarationService.create(declaration); //TODO consider use of tmp
 
         LOGGER.debug("New declaration written to database, value of tmp: {} ", tmp);
                                                                         //TODO consider check for actual insert into DB
 
-        if(tmp) {
-
+        if (tmp) {
              InputChecker.setServiceMessage(request, "new.declaration.successful.submission");
 
              redirect(request, response, ServletPath.MENU);
              return;
-         }
+        }
 
         forward(request, response, JspPath.CLIENT_MENU_PAGE); // TODO test if this forward ever happens
     }

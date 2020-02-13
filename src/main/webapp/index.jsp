@@ -9,7 +9,7 @@
 
 <html>
 <head>
-    <title>Home</title> <%--TODO change name and internationalize according to a concept--%>
+    <title>Tax Declaration app - <fmt:message key="label.page.title" /></title>
     <link rel="icon" href="data:,">
 </head>
 
@@ -22,14 +22,16 @@
 </form>
 <br>
 <hr>
-
-
 <br>
-<p style='color: red;'>${error_message}</p>
-<p style="color: green; font-weight: 700">${service_message}</p>
+
+<p style="color:red; font-weight: 700;">${error_message}</p>
+<c:remove var="error_message" scope="session" />
+
+<p style="color: green; font-weight: 700;">${service_message}</p>
 <c:remove var="service_message" scope="session" />
+
 <h2><fmt:message key="label.login" /></h2>
-<form action="login" method="post" >                                                <%--TODO add dispatcher--%>
+<form action="login" method="post" >
     <input type="text" required placeholder="<fmt:message key="label.loginPlaceholder" />" name="login"><br>
     <input type="password" required placeholder="<fmt:message key="label.passwordPlaceholder" />" name="password"><br><br>
     <input class="button" type="submit" value="<fmt:message key="label.loginButton" />">

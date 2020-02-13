@@ -30,7 +30,7 @@ public class CorrectDeclarationCommand implements Command {
         String income = request.getParameter("income");
         String taxSumDeclared = request.getParameter("taxSumDeclared");
 
-        if (!allNotNull(firstName, secondName, declarationYear, taxCategory, income, taxSumDeclared)) { //TODO add error message
+        if (!allNotNull(firstName, secondName, declarationYear, taxCategory, income, taxSumDeclared)) {
             forward(request, response, JspPath.CORRECT_DECLARATION_PAGE);
             return;
         }
@@ -48,10 +48,9 @@ public class CorrectDeclarationCommand implements Command {
         correctedDeclaration.setTaxCategory((Declaration.TaxCategory.valueOf(taxCategory)));
         correctedDeclaration.setIncome(Long.parseLong(income));
         correctedDeclaration.setTaxSumDeclared(Long.parseLong(taxSumDeclared));
-        correctedDeclaration.setStatus(Declaration.Status.valueOf("SUBMITTED"));
+        correctedDeclaration.setStatus(Declaration.Status.SUBMITTED);
 
         LOGGER.debug("Declaration object updated(corrected): {} ", correctedDeclaration.toString());
-
 
         DeclarationService declarationService = new DeclarationService();
 
@@ -61,7 +60,6 @@ public class CorrectDeclarationCommand implements Command {
                                                                         //TODO consider check for actual insert into DB
 
         if(tmp) {
-
              InputChecker.setServiceMessage(request, "correct.declaration.successful.submission");
 
              redirect(request, response, ServletPath.MENU);

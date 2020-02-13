@@ -4,7 +4,6 @@ import ua.kpi.controller.command.ResourceBundleDispathcher;
 import ua.kpi.model.entities.ClientUser;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
@@ -15,9 +14,6 @@ public class InputChecker {
     private static final String NAME_REGEX_EN = "^[A-Z][a-z]{1,20}$";
     private static final String LOGIN_REGEX ="^[\\w-.]{3,20}$";
     private static final String PASSWORD_REGEX = "^[\\w\\W]{4,20}$";
-    //private static final String EMAIL_REGEX = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"; //TODO
-
-
 
     public static boolean nameIsValid(String name, String userLanguage) {
         if (!allNotNull(name, userLanguage)) {
@@ -84,5 +80,12 @@ public class InputChecker {
         ResourceBundle webInterface = ResourceBundleDispathcher.getResourceBundle(request);
 
         request.getSession().setAttribute("service_message", webInterface.getString(serviceMessage));
+    }
+
+    public static void setSessionErrorMessage(HttpServletRequest request, String errorMessage) {
+
+        ResourceBundle webInterface = ResourceBundleDispathcher.getResourceBundle(request);
+
+        request.getSession().setAttribute("error_message", webInterface.getString(errorMessage));
     }
 }

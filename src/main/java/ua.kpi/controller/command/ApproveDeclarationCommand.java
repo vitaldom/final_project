@@ -17,16 +17,17 @@ public class ApproveDeclarationCommand implements Command {
         private static final Logger LOGGER = LogManager.getLogger(ApproveDeclarationCommand.class);
 
         @Override
-        public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        public void execute(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
 
             Declaration declaration = (Declaration) request.getSession().getAttribute("declarationToProceed");
 
             LOGGER.trace("Declaration to be approved in ApproveDeclarationCommand: {}", declaration);
 
-            DeclarationService declarationService = new  DeclarationService();
+            DeclarationService declarationService = new DeclarationService();
 
-            declarationService.changeStatus(declaration.getId(), "APPROVED");    //TODO consider adding checks/ try-catch
-                                                                                // TODO Hardcoding here - bad practice?
+            declarationService.changeStatus(declaration.getId(), Declaration.Status.APPROVED.toString());
+                                                                                //TODO consider adding checks/ try-catch
 
             ResourceBundle webInterface = ResourceBundleDispathcher.getResourceBundle(request);
             request.getSession().setAttribute("service_message",

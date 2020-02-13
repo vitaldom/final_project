@@ -3,7 +3,6 @@ package ua.kpi.controller.command;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.kpi.controller.path.JspPath;
-import ua.kpi.model.entities.ClientUser;
 import ua.kpi.model.entities.Declaration;
 import ua.kpi.model.entities.InspectorUser;
 import ua.kpi.model.services.declaration.DeclarationService;
@@ -21,10 +20,9 @@ public class DeclarationsForCheckCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        DeclarationService declarationService = new DeclarationService();
-
         InspectorUser user = (InspectorUser) request.getSession().getAttribute("user");
 
+        DeclarationService declarationService = new DeclarationService();
         List<Declaration> declarationList = declarationService.findAllByInspectorLogin(user.getLogin());
 
         request.getSession().setAttribute("declarationList", declarationList);

@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>DeclarationsForCheckPage</title>
+    <title>Tax Declaration app - <fmt:message key="declarations.for.check.header" /></title>
     <link rel="icon" href="data:,">
 </head>
 <body>

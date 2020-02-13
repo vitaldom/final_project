@@ -24,14 +24,6 @@ public class CommandMapper {
         commands.put(ServletPath.CORRECT_DECLARATION, new CorrectDeclarationCommand());
         commands.put(ServletPath.REQUEST_INSPECTOR_CHANGE, new InspectorChangeCommand());
         commands.put(ServletPath.LOGOUT, new LogoutCommand());
-
-
-
-
-
-
-
-
     }
 
     private CommandMapper() {
@@ -40,6 +32,4 @@ public class CommandMapper {
     public static Command getCommand(String key) {
         return commands.get(key);
     }
-
-
 }

@@ -16,5 +16,5 @@ public interface Command {
     default void forward(HttpServletRequest request, HttpServletResponse response, String path)
             throws ServletException, IOException {
         request.getRequestDispatcher(path).forward(request, response);
-    } //TODO check if getServletContext is necessary: request.getServletContext().getRequestDispatcher(path).forward(request, response);
+    }
 }

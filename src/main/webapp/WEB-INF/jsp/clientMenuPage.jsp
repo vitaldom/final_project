@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>UserMenuPage</title>
+    <title>Tax Declaration app - <fmt:message key="client.menu.introduction" /></title>
     <link rel="icon" href="data:,">
 </head>
 <body>

@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import ua.kpi.controller.inputcheck.InputChecker;
 import ua.kpi.controller.path.JspPath;
 import ua.kpi.controller.path.ServletPath;
-import ua.kpi.model.entities.ClientUser;
 import ua.kpi.model.entities.Declaration;
 import ua.kpi.model.entities.InspectorChangeRequest;
 import ua.kpi.model.services.declaration.DeclarationService;
@@ -16,8 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static org.apache.commons.lang3.ObjectUtils.allNotNull;
-
 public class InspectorChangeCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(InspectorChangeCommand.class);
@@ -27,7 +24,6 @@ public class InspectorChangeCommand implements Command {
 
         String inspectorChangeComment = request.getParameter("inspectorChangeComment");
 
-
         if (inspectorChangeComment == null || inspectorChangeComment.equals("")) { //TODO add error message
             forward(request, response, JspPath.CORRECT_DECLARATION_PAGE);
             return;
@@ -35,7 +31,8 @@ public class InspectorChangeCommand implements Command {
 
         Declaration appealedDeclaration = (Declaration) request.getSession().getAttribute("declarationToShow");
 
-        InspectorChangeRequest inspectorChangeRequest = new InspectorChangeRequest(appealedDeclaration, inspectorChangeComment);
+        InspectorChangeRequest inspectorChangeRequest
+                = new InspectorChangeRequest(appealedDeclaration, inspectorChangeComment);
 
         InspectorChangeRequestService inspectorChangeRequestService = new InspectorChangeRequestService();
         boolean tmp = inspectorChangeRequestService.create(inspectorChangeRequest); //TODO consider use of tmp
@@ -44,11 +41,10 @@ public class InspectorChangeCommand implements Command {
         //TODO consider check for actual insert into DB
 
         DeclarationService declarationService = new DeclarationService();
-        declarationService.changeStatus(appealedDeclaration.getId(), "APPEALED");
-        //TODO 1. Avoid hardcoding status? 2. Combine both database requests into transaction?
+        declarationService.changeStatus(appealedDeclaration.getId(), Declaration.Status.APPEALED.toString());
+        //TODO Combine both database requests into transaction?
 
-        if(tmp) {
-
+        if (tmp) {
              InputChecker.setServiceMessage(request, "new.inspector.change.request.successful.submission");
 
              redirect(request, response, ServletPath.MENU);

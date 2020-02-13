@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>InspectorMenu</title>
+    <title>Tax Declaration app - <fmt:message key="inspector.menu.introduction" /></title>
     <link rel="icon" href="data:,">
 </head>
 <body>

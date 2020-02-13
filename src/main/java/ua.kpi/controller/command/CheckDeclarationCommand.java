@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CheckDeclarationCommand implements Command {
 
@@ -24,7 +23,8 @@ public class CheckDeclarationCommand implements Command {
         }
 
         int index = Integer.parseInt(request.getParameter("decIndexInArray")); //TODO add checks for these operations.
-        ArrayList<Declaration> declarationList = (ArrayList<Declaration>) request.getSession().getAttribute("declarationList");
+        ArrayList<Declaration> declarationList =
+                (ArrayList<Declaration>) request.getSession().getAttribute("declarationList");
         Declaration declarationToProceed = declarationList.get(index);
 
         request.getSession().setAttribute("declarationToProceed", declarationToProceed);
@@ -32,3 +32,4 @@ public class CheckDeclarationCommand implements Command {
         forward(request, response, JspPath.CHECK_DECLARATION_PAGE);
     }
 }
+

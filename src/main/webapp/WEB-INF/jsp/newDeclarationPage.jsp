@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>NewReport</title>
+    <title>Tax Declaration app - <fmt:message key="new.declaration.page.header" /></title>
     <link rel="icon" href="data:,">
 </head>
 
