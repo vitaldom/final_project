@@ -7,17 +7,20 @@ import ua.kpi.controller.path.JspPath;
 import ua.kpi.controller.path.ServletPath;
 import ua.kpi.model.entities.Declaration;
 import ua.kpi.model.entities.InspectorChangeRequest;
-import ua.kpi.model.services.declaration.DeclarationService;
-import ua.kpi.model.services.inspectorchangerequest.InspectorChangeRequestService;
+import ua.kpi.model.services.DeclarationService;
+import ua.kpi.model.services.InspectorChangeRequestService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static ua.kpi.controller.TextConstants.DECLARATION_TO_SHOW;
+
 public class InspectorChangeCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(InspectorChangeCommand.class);
+    private static final String INSPECTOR_CHANGE_COMMENT = "inspectorChangeComment";
 
     InspectorChangeRequestService inspectorChangeRequestService = new InspectorChangeRequestService();
     DeclarationService declarationService = new DeclarationService();
@@ -25,14 +28,14 @@ public class InspectorChangeCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String inspectorChangeComment = request.getParameter("inspectorChangeComment");
+        String inspectorChangeComment = request.getParameter(INSPECTOR_CHANGE_COMMENT);
 
         if (inspectorChangeComment == null || inspectorChangeComment.equals("")) { //TODO add error message
             forward(request, response, JspPath.CORRECT_DECLARATION_PAGE);
             return;
         }
 
-        Declaration appealedDeclaration = (Declaration) request.getSession().getAttribute("declarationToShow");
+        Declaration appealedDeclaration = (Declaration) request.getSession().getAttribute(DECLARATION_TO_SHOW);
 
         InspectorChangeRequest inspectorChangeRequest
                 = new InspectorChangeRequest(appealedDeclaration, inspectorChangeComment);

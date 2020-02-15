@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static ua.kpi.controller.TextConstants.*;
+
 public class ViewSingleDeclarationCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(ViewSingleDeclarationCommand.class);
@@ -18,18 +20,18 @@ public class ViewSingleDeclarationCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (request.getParameter("decIndexInArray") == null) {        //on-page language change case
+        if (request.getParameter(DECLARATION_INDEX_IN_ARRAY) == null) {        //on-page language change case
             forward(request, response, JspPath.SINGLE_DECLARATION_PAGE);
         }
 
-        int index = Integer.parseInt(request.getParameter("decIndexInArray"));
+        int index = Integer.parseInt(request.getParameter(DECLARATION_INDEX_IN_ARRAY));
 
         ArrayList<Declaration> declarationList =
-                (ArrayList<Declaration>) request.getSession().getAttribute("declarationList");
+                (ArrayList<Declaration>) request.getSession().getAttribute(DECLARATION_LIST);
 
         Declaration declarationToShow = declarationList.get(index);
 
-        request.getSession().setAttribute("declarationToShow", declarationToShow);
+        request.getSession().setAttribute(DECLARATION_TO_SHOW, declarationToShow);
 
         forward(request, response, JspPath.SINGLE_DECLARATION_PAGE);
     }

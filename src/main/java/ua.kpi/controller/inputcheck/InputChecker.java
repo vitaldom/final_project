@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ResourceBundle;
 
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
+import static ua.kpi.controller.TextConstants.*;
 
 public class InputChecker {
 
@@ -18,7 +19,7 @@ public class InputChecker {
         if (!allNotNull(name, userLanguage)) {
             return false;
         }
-        return userLanguage.equals("uk") ? name.matches(NAME_REGEX_UA) : name.matches(NAME_REGEX_EN);
+        return userLanguage.equals(UK) ? name.matches(NAME_REGEX_UA) : name.matches(NAME_REGEX_EN);
     }
 
 
@@ -71,20 +72,20 @@ public class InputChecker {
 
         ResourceBundle webInterface = ResourceBundleDispatcher.getResourceBundle(request);
 
-        request.setAttribute("error_message", webInterface.getString(errorMessage));
+        request.setAttribute(ERROR_MESSAGE, webInterface.getString(errorMessage));
     }
 
     public static void setServiceMessage(HttpServletRequest request, String serviceMessage) {
 
         ResourceBundle webInterface = ResourceBundleDispatcher.getResourceBundle(request);
 
-        request.getSession().setAttribute("service_message", webInterface.getString(serviceMessage));
+        request.getSession().setAttribute(SERVICE_MESSAGE, webInterface.getString(serviceMessage));
     }
 
     public static void setSessionErrorMessage(HttpServletRequest request, String errorMessage) {
 
         ResourceBundle webInterface = ResourceBundleDispatcher.getResourceBundle(request);
 
-        request.getSession().setAttribute("error_message", webInterface.getString(errorMessage));
+        request.getSession().setAttribute(ERROR_MESSAGE, webInterface.getString(errorMessage));
     }
 }

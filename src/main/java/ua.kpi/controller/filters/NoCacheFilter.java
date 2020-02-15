@@ -13,13 +13,18 @@ public class NoCacheFilter implements Filter {
 
     Logger LOGGER = LogManager.getLogger(NoCacheFilter.class);
 
+    private static final String CACHE_CONTROL = "Cache-Control";
+    private static final String NO_CACHE = "no-cache, no-store, must-revalidate";
+    private static final String EXPIRES = "Expires";
+    private static final String ZERO = "0";
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse resp, FilterChain filterChain)
             throws IOException, ServletException {
 
         HttpServletResponse response = (HttpServletResponse) resp;
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        response.setHeader("Expires", "0");
+        response.setHeader(CACHE_CONTROL, NO_CACHE);
+        response.setHeader(EXPIRES, ZERO);
 
         filterChain.doFilter(request, response);
     }

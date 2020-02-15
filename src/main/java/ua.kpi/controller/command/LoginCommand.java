@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import ua.kpi.controller.inputcheck.InputChecker;
 import ua.kpi.controller.path.ServletPath;
 import ua.kpi.model.entities.AbstractAppUser;
-import ua.kpi.model.services.user.UserService;
+import ua.kpi.model.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.*;
 
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
+import static ua.kpi.controller.TextConstants.*;
 
 
 public class LoginCommand implements Command {
@@ -25,8 +26,8 @@ public class LoginCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
+        String login = request.getParameter(LOGIN);
+        String password = request.getParameter(PASSWORD);
 
         if (!allNotNull(login, password)) {
             InputChecker.setSessionErrorMessage(request, "login.invalid.combination");
@@ -37,10 +38,10 @@ public class LoginCommand implements Command {
         Optional<AbstractAppUser> suggestedUser = Optional.ofNullable(userService.find(login, password));
 
         if (suggestedUser.isPresent()) {
-            Set<String> loggedUsers = (HashSet<String>) request.getServletContext().getAttribute("loggedUsers");
+            Set<String> loggedUsers = (HashSet<String>) request.getServletContext().getAttribute(LOGGED_USERS);
             loggedUsers.add(login);
             AbstractAppUser user = suggestedUser.get();
-            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute(USER, user);
 
             LOGGER.info("User logged in: {} :", login);
 

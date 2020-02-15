@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static ua.kpi.controller.TextConstants.*;
+
 @WebFilter("/*")
 public class SessionLocaleFilter implements Filter {
 
@@ -24,17 +26,17 @@ public class SessionLocaleFilter implements Filter {
         HttpSession session = req.getSession();
         String language;
 
-        if (request.getParameter("lang") != null) {
-            language = request.getParameter("lang");
+        if (request.getParameter(LANG) != null) {
+            language = request.getParameter(LANG);
 
-        } else if (session.getAttribute("sessionLang") != null) {
-            language = (String) session.getAttribute("sessionLang");
+        } else if (session.getAttribute(SESSION_LANGUAGE) != null) {
+            language = (String) session.getAttribute(SESSION_LANGUAGE);
 
         } else {
-            language = "uk";
+            language = UK;
         }
 
-        session.setAttribute("sessionLang", language);
+        session.setAttribute(SESSION_LANGUAGE, language);
 
         filterChain.doFilter(request, response);
     }

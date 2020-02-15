@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import static ua.kpi.controller.TextConstants.USER;
+
 @WebFilter("/*")
 public class AuthorizationFilter implements Filter {
 
@@ -51,7 +53,7 @@ public class AuthorizationFilter implements Filter {
     }
 
     boolean checkAccessRights(HttpServletRequest request) {
-        AbstractAppUser user = (AbstractAppUser) request.getSession().getAttribute("user");
+        AbstractAppUser user = (AbstractAppUser) request.getSession().getAttribute(USER);
         if (user == null) {
             return false;
         }

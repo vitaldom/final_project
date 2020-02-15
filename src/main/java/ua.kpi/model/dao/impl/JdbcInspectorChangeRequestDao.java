@@ -1,9 +1,8 @@
-package ua.kpi.utils;
+package ua.kpi.model.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.kpi.model.dao.impl.declaration.DeclarationDao;
-import ua.kpi.model.dao.impl.inspectorchange.InspectorChangeRequestDao;
+import ua.kpi.model.dao.InspectorChangeRequestDao;
 import ua.kpi.model.entities.InspectorChangeRequest;
 
 import java.sql.Connection;
@@ -11,16 +10,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static ua.kpi.model.dao.impl.sqlqueries.UserSqlQueries.CREATE_INSPECTOR_CHANGE_REQUEST;
-import static ua.kpi.model.dao.impl.sqlqueries.UserSqlQueries.SELECT_LAST_INSPECTOR_CHANGE_REQUEST_ID;
+import static ua.kpi.model.dao.impl.sqlqueries.SqlQueries.CREATE_INSPECTOR_CHANGE_REQUEST;
+import static ua.kpi.model.dao.impl.sqlqueries.SqlQueries.SELECT_LAST_INSPECTOR_CHANGE_REQUEST_ID;
 
-public class InspectorChangeRequestUtils implements InspectorChangeRequestDao {
+public class JdbcInspectorChangeRequestDao implements InspectorChangeRequestDao {
 
-    private static final Logger LOGGER = LogManager.getLogger(InspectorChangeRequestUtils.class);
+    private static final Logger LOGGER = LogManager.getLogger(JdbcInspectorChangeRequestDao.class);
 
     Connection connection;
 
-    public InspectorChangeRequestUtils(Connection connection) {
+    public JdbcInspectorChangeRequestDao(Connection connection) {
         this.connection = connection;
     }
 

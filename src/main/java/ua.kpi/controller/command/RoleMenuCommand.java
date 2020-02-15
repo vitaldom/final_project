@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static ua.kpi.controller.TextConstants.USER;
+
 public class RoleMenuCommand implements Command {
 
         private static final Logger LOGGER = LogManager.getLogger(RoleMenuCommand.class);
@@ -27,7 +29,7 @@ public class RoleMenuCommand implements Command {
         public void execute(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
 
-            AbstractAppUser user = (AbstractAppUser) request.getSession().getAttribute("user");
+            AbstractAppUser user = (AbstractAppUser) request.getSession().getAttribute(USER);
 
             LOGGER.debug("Entering menu page for {} : {}", user.getLogin(), path.get(user.getRole()));
 

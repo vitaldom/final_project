@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static ua.kpi.controller.TextConstants.*;
+
 public class CheckDeclarationCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(CheckDeclarationCommand.class);
@@ -18,16 +20,16 @@ public class CheckDeclarationCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (request.getParameter("decIndexInArray") == null) {        //on-page language change case
+        if (request.getParameter(DECLARATION_INDEX_IN_ARRAY) == null) {        //on-page language change case
             forward(request, response, JspPath.CHECK_DECLARATION_PAGE);
         }
 
-        int index = Integer.parseInt(request.getParameter("decIndexInArray")); //TODO add checks for these operations.
+        int index = Integer.parseInt(request.getParameter(DECLARATION_INDEX_IN_ARRAY)); //TODO add checks for these operations.
         ArrayList<Declaration> declarationList =
-                (ArrayList<Declaration>) request.getSession().getAttribute("declarationList");
+                (ArrayList<Declaration>) request.getSession().getAttribute(DECLARATION_LIST);
         Declaration declarationToProceed = declarationList.get(index);
 
-        request.getSession().setAttribute("declarationToProceed", declarationToProceed);
+        request.getSession().setAttribute(DECLARATION_TO_PROCEED, declarationToProceed);
 
         forward(request, response, JspPath.CHECK_DECLARATION_PAGE);
     }

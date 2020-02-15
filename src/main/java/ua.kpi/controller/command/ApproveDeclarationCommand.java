@@ -5,13 +5,16 @@ import org.apache.logging.log4j.Logger;
 import ua.kpi.controller.inputcheck.ResourceBundleDispatcher;
 import ua.kpi.controller.path.ServletPath;
 import ua.kpi.model.entities.Declaration;
-import ua.kpi.model.services.declaration.DeclarationService;
+import ua.kpi.model.services.DeclarationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ResourceBundle;
+
+import static ua.kpi.controller.TextConstants.DECLARATION_TO_PROCEED;
+import static ua.kpi.controller.TextConstants.SERVICE_MESSAGE;
 
 public class ApproveDeclarationCommand implements Command {
 
@@ -23,7 +26,7 @@ public class ApproveDeclarationCommand implements Command {
         public void execute(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
 
-            Declaration declaration = (Declaration) request.getSession().getAttribute("declarationToProceed");
+            Declaration declaration = (Declaration) request.getSession().getAttribute(DECLARATION_TO_PROCEED);
 
             LOGGER.trace("Declaration to be approved in ApproveDeclarationCommand: {}", declaration);
 
@@ -31,7 +34,7 @@ public class ApproveDeclarationCommand implements Command {
                                                                                 //TODO consider adding checks/ try-catch
 
             ResourceBundle webInterface = ResourceBundleDispatcher.getResourceBundle(request);
-            request.getSession().setAttribute("service_message",
+            request.getSession().setAttribute(SERVICE_MESSAGE,
                     webInterface.getString("check.declaration.successful.approval"));
 
             redirect(request, response, ServletPath.VIEW_DECLARATIONS_FOR_CHECK);

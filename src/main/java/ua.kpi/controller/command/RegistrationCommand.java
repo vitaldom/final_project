@@ -7,7 +7,7 @@ import ua.kpi.controller.path.ServletPath;
 import ua.kpi.controller.inputcheck.InputChecker;
 import ua.kpi.model.entities.AbstractAppUser;
 import ua.kpi.model.entities.ClientUser;
-import ua.kpi.model.services.user.UserService;
+import ua.kpi.model.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
+import static ua.kpi.controller.TextConstants.*;
 
 public class RegistrationCommand implements Command {
 
@@ -24,10 +25,10 @@ public class RegistrationCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String firstName = request.getParameter("firstName");
-        String secondName = request.getParameter("secondName");
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
+        String firstName = request.getParameter(FIRST_NAME);
+        String secondName = request.getParameter(SECOND_NAME);
+        String login = request.getParameter(LOGIN);
+        String password = request.getParameter(PASSWORD);
 
         if (!allNotNull(firstName, secondName, login, password)) { // Page requested for the first time
             forward(request, response, JspPath.REGISTRATION_PAGE);
@@ -59,7 +60,7 @@ public class RegistrationCommand implements Command {
     boolean checkRegistrationData(HttpServletRequest request, String firstName,
                                   String secondName, String login, String password) {
 
-        String userLanguage = (String) request.getSession().getAttribute("sessionLang"); //TODO
+        String userLanguage = (String) request.getSession().getAttribute(SESSION_LANGUAGE); //TODO
 
         if(!InputChecker.nameIsValid(firstName, userLanguage)) {
             InputChecker.setSessionErrorMessage(request, "registration.invalid.first.name");

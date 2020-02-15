@@ -1,28 +1,28 @@
-package ua.kpi.model.services.user;
+package ua.kpi.model.services;
 
+import ua.kpi.model.dao.DaoFactory;
 import ua.kpi.model.entities.AbstractAppUser;
-import ua.kpi.model.dao.impl.user.UserDao;
-import ua.kpi.model.dao.impl.user.UserDaoFactory;
+import ua.kpi.model.dao.UserDao;
 import ua.kpi.model.entities.ClientUser;
 
 public class UserService {
 
-    UserDaoFactory daoFactory = UserDaoFactory.getInstance();
+    private DaoFactory daoFactory = DaoFactory.getInstance();
 
     public boolean create(AbstractAppUser user) {
-        try (UserDao dao = daoFactory.create()) {
+        try (UserDao dao = daoFactory.createUserDao()) {
             return dao.create(user);
         }
     }
 
     public AbstractAppUser find(String login, String password) {
-        try (UserDao dao = daoFactory.find()) {
+        try (UserDao dao = daoFactory.createUserDao()) {
             return dao.find(login, password);
         }
     }
 
     public ClientUser findClientByLogin(String login) {
-        try (UserDao dao = daoFactory.findClientByLogin()) {
+        try (UserDao dao = daoFactory.createUserDao()) {
             return dao.findClientByLogin(login);
         }
     }

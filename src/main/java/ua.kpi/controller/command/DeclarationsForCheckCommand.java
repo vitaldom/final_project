@@ -5,13 +5,16 @@ import org.apache.logging.log4j.Logger;
 import ua.kpi.controller.path.JspPath;
 import ua.kpi.model.entities.Declaration;
 import ua.kpi.model.entities.InspectorUser;
-import ua.kpi.model.services.declaration.DeclarationService;
+import ua.kpi.model.services.DeclarationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+
+import static ua.kpi.controller.TextConstants.DECLARATION_LIST;
+import static ua.kpi.controller.TextConstants.USER;
 
 public class DeclarationsForCheckCommand implements Command {
 
@@ -22,11 +25,11 @@ public class DeclarationsForCheckCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        InspectorUser user = (InspectorUser) request.getSession().getAttribute("user");
+        InspectorUser user = (InspectorUser) request.getSession().getAttribute(USER);
 
         List<Declaration> declarationList = declarationService.findAllByInspectorLogin(user.getLogin());
 
-        request.getSession().setAttribute("declarationList", declarationList);
+        request.getSession().setAttribute(DECLARATION_LIST, declarationList);
 
         LOGGER.info("Showing declarations for check for user {}", user.getLogin());
 

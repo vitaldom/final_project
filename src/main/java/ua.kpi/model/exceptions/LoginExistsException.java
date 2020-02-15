@@ -1,4 +1,4 @@
-package ua.kpi.model.services.exceptions;
+package ua.kpi.model.exceptions;
 
 public class LoginExistsException extends Exception {
 

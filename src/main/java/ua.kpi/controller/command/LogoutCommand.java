@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import static ua.kpi.controller.TextConstants.LOGGED_USERS;
+import static ua.kpi.controller.TextConstants.USER;
+
 public class LogoutCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(LogoutCommand.class);
@@ -22,8 +25,8 @@ public class LogoutCommand implements Command {
         HttpSession session = request.getSession(false);
 
         if (session != null) {
-            AbstractAppUser user = (AbstractAppUser) session.getAttribute("user");
-            Set<String> loggedUsers = (HashSet<String>) request.getServletContext().getAttribute("loggedUsers");
+            AbstractAppUser user = (AbstractAppUser) session.getAttribute(USER);
+            Set<String> loggedUsers = (HashSet<String>) request.getServletContext().getAttribute(LOGGED_USERS);
             loggedUsers.remove(user.getLogin());
 
             LOGGER.info("Session invalidate for user : {}", user.getLogin());

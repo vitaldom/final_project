@@ -5,12 +5,15 @@ import org.apache.logging.log4j.Logger;
 import ua.kpi.controller.inputcheck.InputChecker;
 import ua.kpi.controller.path.ServletPath;
 import ua.kpi.model.entities.Declaration;
-import ua.kpi.model.services.declaration.DeclarationService;
+import ua.kpi.model.services.DeclarationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static ua.kpi.controller.TextConstants.DECLARATION_TO_PROCEED;
+import static ua.kpi.controller.TextConstants.DECLINE_MESSAGE;
 
 public class DeclineDeclarationCommand implements Command {
 
@@ -21,8 +24,8 @@ public class DeclineDeclarationCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Declaration declaration = (Declaration) request.getSession().getAttribute("declarationToProceed");
-        String declineMessage = request.getParameter("declineMessage");
+        Declaration declaration = (Declaration) request.getSession().getAttribute(DECLARATION_TO_PROCEED);
+        String declineMessage = request.getParameter(DECLINE_MESSAGE);
 
         if (declineMessage == null) { //TODO check if this null, or empty string
 

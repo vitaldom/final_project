@@ -1,25 +1,25 @@
-package ua.kpi.utils;
+package ua.kpi.model.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.kpi.model.dao.DeclarationDao;
 import ua.kpi.model.dao.Mapper.DeclarationMapper;
-import ua.kpi.model.dao.impl.declaration.DeclarationDao;
-import ua.kpi.model.dao.impl.sqlqueries.UserSqlQueries;
+import ua.kpi.model.dao.impl.sqlqueries.SqlQueries;
 import ua.kpi.model.entities.Declaration;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ua.kpi.model.dao.impl.sqlqueries.UserSqlQueries.*;
+import static ua.kpi.model.dao.impl.sqlqueries.SqlQueries.*;
 
-public class DeclarationUtils implements DeclarationDao {
+public class JdbcDeclarationDao implements DeclarationDao {
 
-    private static final Logger LOGGER = LogManager.getLogger(DeclarationUtils.class);
+    private static final Logger LOGGER = LogManager.getLogger(JdbcDeclarationDao.class);
 
     Connection connection;
 
-    public DeclarationUtils(Connection connection) {
+    public JdbcDeclarationDao(Connection connection) {
         this.connection = connection;
     }
 
@@ -130,7 +130,7 @@ public class DeclarationUtils implements DeclarationDao {
 
     @Override
     public boolean changeStatus(int id, String newStatus) {
-        try (PreparedStatement statement = connection.prepareStatement(UserSqlQueries.CHANGE_DECLARATION_STATUS)) {
+        try (PreparedStatement statement = connection.prepareStatement(SqlQueries.CHANGE_DECLARATION_STATUS)) {
 
             statement.setInt(2, id);
             statement.setString(1, newStatus);
@@ -146,7 +146,7 @@ public class DeclarationUtils implements DeclarationDao {
 
     @Override
     public boolean decline(int id, String declineMessage) {
-        try (PreparedStatement statement = connection.prepareStatement(UserSqlQueries.DECLINE_DECLARATION)) {
+        try (PreparedStatement statement = connection.prepareStatement(SqlQueries.DECLINE_DECLARATION)) {
             statement.setInt(2, id);
             statement.setString(1, declineMessage);
 

@@ -1,25 +1,25 @@
-package ua.kpi.utils;
+package ua.kpi.model.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.kpi.model.dao.Mapper.AbstractUserMapper;
+import ua.kpi.model.dao.UserDao;
 import ua.kpi.model.entities.AbstractAppUser;
-import ua.kpi.model.dao.impl.user.UserDao;
 import ua.kpi.model.entities.ClientUser;
 
 import java.sql.*;
 
-import static ua.kpi.model.dao.impl.sqlqueries.UserSqlQueries.*;
+import static ua.kpi.model.dao.impl.sqlqueries.SqlQueries.*;
 
-public class AbstractUserUtils implements UserDao {
+public class JdbcAbstractUserDao implements UserDao {
 
     private static final String COUNT = "count";
-    private static final Logger LOGGER = LogManager.getLogger(AbstractUserUtils.class);
+    private static final Logger LOGGER = LogManager.getLogger(JdbcAbstractUserDao.class);
 
-   AbstractUserMapper userMapper = new AbstractUserMapper(); //TODO consider generic version to add inspector
+    AbstractUserMapper userMapper = new AbstractUserMapper(); //TODO consider generic version to add inspector
     Connection connection;
 
-    public AbstractUserUtils(Connection connection) {
+    public JdbcAbstractUserDao(Connection connection) {
         this.connection = connection;
     }
 
@@ -92,7 +92,7 @@ public class AbstractUserUtils implements UserDao {
         return null;
     }
 
-    //@Override
+    @Override
     public ClientUser findClientByLogin(String login) {
 
         try(PreparedStatement ps = connection.prepareStatement(FIND_CLIENT_BY_LOGIN)) {

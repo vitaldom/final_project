@@ -1,4 +1,4 @@
-package ua.kpi.model.dao.impl.declaration;
+package ua.kpi.model.dao;
 
 import ua.kpi.model.dao.GenericDao;
 import ua.kpi.model.entities.Declaration;

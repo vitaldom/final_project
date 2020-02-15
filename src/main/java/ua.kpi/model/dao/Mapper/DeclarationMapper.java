@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.kpi.model.dao.impl.columns.DeclarationSqlColumns;
 import ua.kpi.model.entities.Declaration;
-import ua.kpi.model.services.user.UserService;
+import ua.kpi.model.services.UserService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
