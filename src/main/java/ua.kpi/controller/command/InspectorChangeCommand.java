@@ -19,6 +19,9 @@ public class InspectorChangeCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(InspectorChangeCommand.class);
 
+    InspectorChangeRequestService inspectorChangeRequestService = new InspectorChangeRequestService();
+    DeclarationService declarationService = new DeclarationService();
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -34,13 +37,11 @@ public class InspectorChangeCommand implements Command {
         InspectorChangeRequest inspectorChangeRequest
                 = new InspectorChangeRequest(appealedDeclaration, inspectorChangeComment);
 
-        InspectorChangeRequestService inspectorChangeRequestService = new InspectorChangeRequestService();
         boolean tmp = inspectorChangeRequestService.create(inspectorChangeRequest); //TODO consider use of tmp
 
         LOGGER.debug("New new inspector change request written to database, value of tmp: {} ", tmp);
         //TODO consider check for actual insert into DB
 
-        DeclarationService declarationService = new DeclarationService();
         declarationService.changeStatus(appealedDeclaration.getId(), Declaration.Status.APPEALED.toString());
         //TODO Combine both database requests into transaction?
 

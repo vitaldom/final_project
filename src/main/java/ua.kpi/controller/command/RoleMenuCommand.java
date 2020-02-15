@@ -19,15 +19,15 @@ public class RoleMenuCommand implements Command {
         private final Map<String, String> path = new HashMap<>();
 
         {
-            path.put("INSPECTOR", JspPath.INSPECTOR_MENU_PAGE);
-            path.put("CLIENT", JspPath.CLIENT_MENU_PAGE);
+            path.put(AbstractAppUser.Role.INSPECTOR.toString(), JspPath.INSPECTOR_MENU_PAGE);
+            path.put(AbstractAppUser.Role.CLIENT.toString(), JspPath.CLIENT_MENU_PAGE);
         }
 
         @Override
-        public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            AbstractAppUser user = (AbstractAppUser) request.getSession().getAttribute("user");
+        public void execute(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
 
-            LOGGER.debug("Entered execution in RoleMenuCommand");
+            AbstractAppUser user = (AbstractAppUser) request.getSession().getAttribute("user");
 
             LOGGER.debug("Entering menu page for {} : {}", user.getLogin(), path.get(user.getRole()));
 

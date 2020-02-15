@@ -57,6 +57,9 @@
 </form>
 <hr>
 
+<p style="color:red; font-weight: 700;">${error_message}</p>
+<c:remove var="error_message" scope="session" />
+
 <form action="${pageContext.request.contextPath}/declineDeclaration" method="post">
     <input style="width: 500px; height: 100px" required type="text" name="declineMessage"
            placeholder="<fmt:message key="check.declaration.decline.reason" />" />

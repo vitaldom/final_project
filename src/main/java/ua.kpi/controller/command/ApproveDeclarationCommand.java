@@ -2,6 +2,7 @@ package ua.kpi.controller.command;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.kpi.controller.inputcheck.ResourceBundleDispatcher;
 import ua.kpi.controller.path.ServletPath;
 import ua.kpi.model.entities.Declaration;
 import ua.kpi.model.services.declaration.DeclarationService;
@@ -16,6 +17,8 @@ public class ApproveDeclarationCommand implements Command {
 
         private static final Logger LOGGER = LogManager.getLogger(ApproveDeclarationCommand.class);
 
+        DeclarationService declarationService = new DeclarationService();
+
         @Override
         public void execute(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
@@ -24,12 +27,10 @@ public class ApproveDeclarationCommand implements Command {
 
             LOGGER.trace("Declaration to be approved in ApproveDeclarationCommand: {}", declaration);
 
-            DeclarationService declarationService = new DeclarationService();
-
             declarationService.changeStatus(declaration.getId(), Declaration.Status.APPROVED.toString());
                                                                                 //TODO consider adding checks/ try-catch
 
-            ResourceBundle webInterface = ResourceBundleDispathcher.getResourceBundle(request);
+            ResourceBundle webInterface = ResourceBundleDispatcher.getResourceBundle(request);
             request.getSession().setAttribute("service_message",
                     webInterface.getString("check.declaration.successful.approval"));
 

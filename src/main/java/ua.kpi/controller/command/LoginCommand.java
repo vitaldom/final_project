@@ -20,6 +20,8 @@ public class LoginCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
 
+    UserService userService = new UserService();
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -32,7 +34,6 @@ public class LoginCommand implements Command {
             return;
         }
 
-        UserService userService = new UserService();
         Optional<AbstractAppUser> suggestedUser = Optional.ofNullable(userService.find(login, password));
 
         if (suggestedUser.isPresent()) {
@@ -43,7 +44,7 @@ public class LoginCommand implements Command {
 
             LOGGER.info("User logged in: {} :", login);
 
-            redirect(request, response, ServletPath.MENU);
+            response.sendRedirect(ServletPath.MENU);
 
         } else {
             LOGGER.warn("Attempt to login with invalid credentials. Login: {} Password: {}", login, password);

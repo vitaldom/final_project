@@ -20,6 +20,8 @@ public class CreateDeclarationCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(CreateDeclarationCommand.class);
 
+    DeclarationService declarationService = new DeclarationService();
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -50,7 +52,6 @@ public class CreateDeclarationCommand implements Command {
 
         LOGGER.debug("New declaration object created: {} ", declaration.toString());
 
-        DeclarationService declarationService = new DeclarationService();
         boolean tmp = declarationService.create(declaration); //TODO consider use of tmp
 
         LOGGER.debug("New declaration written to database, value of tmp: {} ", tmp);

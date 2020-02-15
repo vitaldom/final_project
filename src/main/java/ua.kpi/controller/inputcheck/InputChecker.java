@@ -1,6 +1,5 @@
 package ua.kpi.controller.inputcheck;
 
-import ua.kpi.controller.command.ResourceBundleDispathcher;
 import ua.kpi.model.entities.ClientUser;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,21 +69,21 @@ public class InputChecker {
 
     static void setErrorMessage(HttpServletRequest request, String errorMessage) {
 
-        ResourceBundle webInterface = ResourceBundleDispathcher.getResourceBundle(request);
+        ResourceBundle webInterface = ResourceBundleDispatcher.getResourceBundle(request);
 
         request.setAttribute("error_message", webInterface.getString(errorMessage));
     }
 
     public static void setServiceMessage(HttpServletRequest request, String serviceMessage) {
 
-        ResourceBundle webInterface = ResourceBundleDispathcher.getResourceBundle(request);
+        ResourceBundle webInterface = ResourceBundleDispatcher.getResourceBundle(request);
 
         request.getSession().setAttribute("service_message", webInterface.getString(serviceMessage));
     }
 
     public static void setSessionErrorMessage(HttpServletRequest request, String errorMessage) {
 
-        ResourceBundle webInterface = ResourceBundleDispathcher.getResourceBundle(request);
+        ResourceBundle webInterface = ResourceBundleDispatcher.getResourceBundle(request);
 
         request.getSession().setAttribute("error_message", webInterface.getString(errorMessage));
     }

@@ -17,12 +17,13 @@ public class DeclarationsForCheckCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(DeclarationsForCheckCommand.class);
 
+    DeclarationService declarationService = new DeclarationService();
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         InspectorUser user = (InspectorUser) request.getSession().getAttribute("user");
 
-        DeclarationService declarationService = new DeclarationService();
         List<Declaration> declarationList = declarationService.findAllByInspectorLogin(user.getLogin());
 
         request.getSession().setAttribute("declarationList", declarationList);

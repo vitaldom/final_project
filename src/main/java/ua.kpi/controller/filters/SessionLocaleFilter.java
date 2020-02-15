@@ -24,8 +24,6 @@ public class SessionLocaleFilter implements Filter {
         HttpSession session = req.getSession();
         String language;
 
-        //LOGGER.debug("Default request Locale: {}", req.getLocale()); //TODO
-
         if (request.getParameter("lang") != null) {
             language = request.getParameter("lang");
 
@@ -37,8 +35,6 @@ public class SessionLocaleFilter implements Filter {
         }
 
         session.setAttribute("sessionLang", language);
-
-        //LOGGER.debug("sessionLang = {}", language); //TODO
 
         filterChain.doFilter(request, response);
     }

@@ -11,10 +11,4 @@ public class JspPath {
     public static final String DECLARATIONS_FOR_CHECK_PAGE = "/WEB-INF/jsp/declarationsForCheckPage.jsp";
     public static final String CHECK_DECLARATION_PAGE = "/WEB-INF/jsp/checkDeclarationPage.jsp";
     public static final String CORRECT_DECLARATION_PAGE = "/WEB-INF/jsp/declinedDeclarationPage.jsp";
-
-
-
-
-
-
 }

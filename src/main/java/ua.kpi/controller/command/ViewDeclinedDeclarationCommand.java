@@ -24,7 +24,8 @@ public class ViewDeclinedDeclarationCommand implements Command {
 
         int index = Integer.parseInt(request.getParameter("decIndexInArray"));
 
-        ArrayList<Declaration> declarationList = (ArrayList<Declaration>) request.getSession().getAttribute("declarationList");
+        ArrayList<Declaration> declarationList =
+                (ArrayList<Declaration>) request.getSession().getAttribute("declarationList");
 
         Declaration declarationToShow = declarationList.get(index);
 

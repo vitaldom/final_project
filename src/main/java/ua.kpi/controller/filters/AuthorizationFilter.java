@@ -1,11 +1,8 @@
 package ua.kpi.controller.filters;
 
-
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.kpi.controller.inputcheck.InputChecker;
-import ua.kpi.controller.path.JspPath;
 import ua.kpi.controller.path.ServletPath;
 import ua.kpi.model.entities.AbstractAppUser;
 
@@ -31,14 +28,13 @@ public class AuthorizationFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain)
+            throws IOException, ServletException {
 
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
 
         String requestedUri = request.getRequestURI();
-        LOGGER.debug("Requested URI in Authorization filter: {}", requestedUri); //TODO
-//        LOGGER.debug("Logged users: {}", LOGGED_USERS); //TODO
 
         if (requestedUri.equals(ServletPath.START_PAGE)
                 || requestedUri.equals(ServletPath.REGISTRATION)

@@ -20,6 +20,8 @@ public class CorrectDeclarationCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(CorrectDeclarationCommand.class);
 
+    DeclarationService declarationService = new DeclarationService();
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -50,9 +52,7 @@ public class CorrectDeclarationCommand implements Command {
         correctedDeclaration.setTaxSumDeclared(Long.parseLong(taxSumDeclared));
         correctedDeclaration.setStatus(Declaration.Status.SUBMITTED);
 
-        LOGGER.debug("Declaration object updated(corrected): {} ", correctedDeclaration.toString());
-
-        DeclarationService declarationService = new DeclarationService();
+        LOGGER.debug("Declaration object updated(corrected): {} ", correctedDeclaration);
 
         boolean tmp = declarationService.correct(correctedDeclaration); //TODO consider use of tmp
 

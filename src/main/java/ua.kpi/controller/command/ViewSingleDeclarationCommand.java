@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ViewSingleDeclarationCommand implements Command {
 
@@ -25,7 +24,8 @@ public class ViewSingleDeclarationCommand implements Command {
 
         int index = Integer.parseInt(request.getParameter("decIndexInArray"));
 
-        ArrayList<Declaration> declarationList = (ArrayList<Declaration>) request.getSession().getAttribute("declarationList");
+        ArrayList<Declaration> declarationList =
+                (ArrayList<Declaration>) request.getSession().getAttribute("declarationList");
 
         Declaration declarationToShow = declarationList.get(index);
 

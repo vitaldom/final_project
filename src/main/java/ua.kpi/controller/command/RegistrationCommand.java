@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
-import static ua.kpi.controller.path.JspPath.REGISTRATION_PAGE;
 
 public class RegistrationCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(RegistrationCommand.class);
+    UserService userService = new UserService();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,40 +29,17 @@ public class RegistrationCommand implements Command {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        if (!allNotNull(firstName, secondName, login, password)) { //TODO add error message
+        if (!allNotNull(firstName, secondName, login, password)) { // Page requested for the first time
             forward(request, response, JspPath.REGISTRATION_PAGE);
             return;
         }
 
-        String userLanguage = (String) request.getSession().getAttribute("sessionLang"); //TODO
-
-        if(!InputChecker.nameIsValid(firstName, userLanguage)) {
-            InputChecker.setSessionErrorMessage(request, "registration.invalid.first.name");
+        if (!checkRegistrationData(request, firstName, secondName, login, password)) {
             response.sendRedirect(ServletPath.REGISTRATION);
             return;
         }
-
-        if(!InputChecker.nameIsValid(secondName, userLanguage)) {
-            InputChecker.setSessionErrorMessage(request,"registration.invalid.second.name");
-            response.sendRedirect(ServletPath.REGISTRATION);
-            return;
-        }
-
-        if(!InputChecker.loginIsValid(login)) {
-            InputChecker.setSessionErrorMessage(request,"registration.invalid.login");
-            response.sendRedirect(ServletPath.REGISTRATION);
-            return;
-        }
-
-        if(!InputChecker.passwordIsValid(password)) {
-            InputChecker.setSessionErrorMessage(request,"registration.invalid.password");
-            response.sendRedirect(ServletPath.REGISTRATION);
-            return;
-        }
-        //TODO check for duplicate login!
 
         AbstractAppUser user = new ClientUser(firstName, secondName, login, password);
-        UserService userService = new UserService();
 
          boolean tmp = userService.create(user); //TODO consider use of tmp
          AbstractAppUser registeredUser = userService.find(login, password);
@@ -76,6 +53,39 @@ public class RegistrationCommand implements Command {
              return;
          }
 
-        forward(request, response, REGISTRATION_PAGE);
+        forward(request, response, JspPath.REGISTRATION_PAGE);
+    }
+
+    boolean checkRegistrationData(HttpServletRequest request, String firstName,
+                                  String secondName, String login, String password) {
+
+        String userLanguage = (String) request.getSession().getAttribute("sessionLang"); //TODO
+
+        if(!InputChecker.nameIsValid(firstName, userLanguage)) {
+            InputChecker.setSessionErrorMessage(request, "registration.invalid.first.name");
+            return false;
+        }
+
+        if(!InputChecker.nameIsValid(secondName, userLanguage)) {
+            InputChecker.setSessionErrorMessage(request,"registration.invalid.second.name");
+            return false;
+        }
+
+        if(!InputChecker.loginIsValid(login)) {
+            InputChecker.setSessionErrorMessage(request,"registration.invalid.login");
+            return false;
+        }
+
+        if (userService.findClientByLogin(login) != null) {
+            InputChecker.setSessionErrorMessage(request,"registration.login.already.exists");
+            return false;
+        }
+
+        if(!InputChecker.passwordIsValid(password)) {
+            InputChecker.setSessionErrorMessage(request,"registration.invalid.password");
+            return false;
+        }
+
+        return true;
     }
 }
