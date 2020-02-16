@@ -1,15 +1,17 @@
 package ua.kpi.model.entities;
 
-import ua.kpi.model.entities.AbstractAppUser;
-
+/**
+ * Represents client users of the application, who can register and submit declarations.
+ */
 public class ClientUser extends AbstractAppUser {
+
     public ClientUser(String firstName, String secondName, String login, String password) {
 
         setFirstName(firstName);
         setSecondName(secondName);
         setLogin(login);
         setPassword(password); //TODO add personal tax number
-        setRole("CLIENT"); //TODO consider changing to a constant
+        setRole(Role.CLIENT.toString());
     }
 
     public static class Builder extends AbstractAppUser.Builder<Builder> {

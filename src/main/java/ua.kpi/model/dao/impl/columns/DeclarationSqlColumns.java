@@ -11,6 +11,4 @@ public final class DeclarationSqlColumns {
         public static final String TAX_SUM_DECLARED = "tax_sum_declared";
         public static final String STATUS = "status";
         public static final String CORRECTION_MESSAGE = "correction_message";
-
-
 }

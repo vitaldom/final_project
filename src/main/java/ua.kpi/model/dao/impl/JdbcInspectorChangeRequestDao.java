@@ -17,6 +17,8 @@ public class JdbcInspectorChangeRequestDao implements InspectorChangeRequestDao 
 
     private static final Logger LOGGER = LogManager.getLogger(JdbcInspectorChangeRequestDao.class);
 
+    private static final String MAX_ID = "MAX(id)";
+
     Connection connection;
 
     public JdbcInspectorChangeRequestDao(Connection connection) {
@@ -32,7 +34,7 @@ public class JdbcInspectorChangeRequestDao implements InspectorChangeRequestDao 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) { //TODO check necessary?
 
-                int id = rs.getInt("MAX(id)");
+                int id = rs.getInt(MAX_ID);
                 inspectorChangeRequest.setId(++id);
 
                     try(PreparedStatement ps1 = connection.prepareStatement(CREATE_INSPECTOR_CHANGE_REQUEST)) {

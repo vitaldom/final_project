@@ -1,5 +1,9 @@
 package ua.kpi.model.entities;
 
+/**
+ * Designed for inheritance by classes, representing concrete user roles in the application -
+ * client user and inspector user.
+ */
 abstract public class AbstractAppUser {
     private String firstName;
     private String secondName;
@@ -59,8 +63,7 @@ abstract public class AbstractAppUser {
         return "\nfirstName: " + getFirstName() +
                 "\nsecondName: " + getSecondName() +
                 "\nlogin: " + getLogin() +
-                "\npassword: " + getPassword() +
-                "\nrole: " + getRole(); //TODO consider returning password
+                "\nrole: " + getRole();
     }
 
     public abstract static class Builder<T extends Builder<T>> {

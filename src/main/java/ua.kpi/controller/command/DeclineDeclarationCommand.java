@@ -15,6 +15,10 @@ import java.io.IOException;
 import static ua.kpi.controller.TextConstants.DECLARATION_TO_PROCEED;
 import static ua.kpi.controller.TextConstants.DECLINE_MESSAGE;
 
+/**
+ * Invoked when inspector chooses to decline a declaration, with obligatory reason message. Declaration becomes
+ * available for a client for correction.
+ */
 public class DeclineDeclarationCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(DeclineDeclarationCommand.class);

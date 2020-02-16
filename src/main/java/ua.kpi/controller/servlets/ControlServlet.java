@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Manages flow of the application. Commands are stored in a map and dispatched based on request URI.
+ */
 @WebServlet(urlPatterns = "/")
 public class ControlServlet extends HttpServlet {
 

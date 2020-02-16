@@ -11,11 +11,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ua.kpi.model.dao.impl.columns.UsersSqlColumns.LOGIN;
 import static ua.kpi.model.dao.impl.sqlqueries.SqlQueries.*;
 
 public class JdbcDeclarationDao implements DeclarationDao {
 
     private static final Logger LOGGER = LogManager.getLogger(JdbcDeclarationDao.class);
+
+    private static final String MAX_ID = "max(id)";
 
     Connection connection;
 
@@ -34,7 +37,7 @@ public class JdbcDeclarationDao implements DeclarationDao {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) { //TODO check necessary?
 
-                int id = rs.getInt("max(id)");
+                int id = rs.getInt(MAX_ID);
                 declaration.setId(++id);
 
                     try(PreparedStatement ps1 = connection.prepareStatement(CREATE_DECLARATION)) {
@@ -64,12 +67,13 @@ public class JdbcDeclarationDao implements DeclarationDao {
         return false;
     }
 
+    @Override
     public boolean assignInspector(Declaration declaration) {
         try(PreparedStatement ps1 = connection.prepareStatement(SELECT_LEAST_BUSY_INSPECTOR)) {
 
             ResultSet rs = ps1.executeQuery();
             if (rs.next()) {
-                String inspectorLogin = rs.getString("login");
+                String inspectorLogin = rs.getString(LOGIN);
                 declaration.setInspectorLogin(inspectorLogin);
 
                 PreparedStatement ps2 = connection.prepareStatement(INCREMENT_REPORTS_ASSIGNED); //TODO Combine in one request?

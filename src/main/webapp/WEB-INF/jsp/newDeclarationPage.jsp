@@ -1,4 +1,5 @@
-<%@ include file="../includes/lang_change_block.jsp"%>
+<%@ include file="../includes/languageChangeBlock.jsp"%>
+<%@ include file="../includes/logoutButton.jsp"%>
 
 <html>
 <head>
@@ -14,6 +15,7 @@
 
     <table border="0">
         <p style='color: red;'>${error_message}</p>
+        <c:remove var="error_message" scope="session" />
         <tr>
             <td><label for="firstName"><fmt:message key="registration.first.name" />:</label></td>
             <td><input required type="text" id="firstName" name="firstName" value="${sessionScope.user.firstName}"/> </td>

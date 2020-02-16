@@ -14,13 +14,17 @@ import java.util.Map;
 
 import static ua.kpi.controller.TextConstants.USER;
 
+/**
+ * Encapsulates logic for forwarding application users to their respective menu page, depending on the role
+ * (client user or inspector user).
+ */
 public class RoleMenuCommand implements Command {
 
         private static final Logger LOGGER = LogManager.getLogger(RoleMenuCommand.class);
 
-        private final Map<String, String> path = new HashMap<>();
+        private static final  Map<String, String> path = new HashMap<>();
 
-        {
+        static {
             path.put(AbstractAppUser.Role.INSPECTOR.toString(), JspPath.INSPECTOR_MENU_PAGE);
             path.put(AbstractAppUser.Role.CLIENT.toString(), JspPath.CLIENT_MENU_PAGE);
         }

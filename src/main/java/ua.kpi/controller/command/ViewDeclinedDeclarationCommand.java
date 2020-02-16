@@ -13,6 +13,9 @@ import java.util.ArrayList;
 
 import static ua.kpi.controller.TextConstants.*;
 
+/**
+ * Renders page for client user to view a declined declaration.
+ */
 public class ViewDeclinedDeclarationCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(ViewDeclinedDeclarationCommand.class);

@@ -16,6 +16,7 @@ public class SessionLocaleFilter implements Filter {
 
     private static final Logger LOGGER = LogManager.getLogger(SessionLocaleFilter.class);
 
+    @Override
     public void init(FilterConfig config) throws ServletException {
     }
 
@@ -41,6 +42,7 @@ public class SessionLocaleFilter implements Filter {
         filterChain.doFilter(request, response);
     }
 
+    @Override
     public void destroy() {
     }
 }

@@ -17,6 +17,10 @@ import java.io.IOException;
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
 import static ua.kpi.controller.TextConstants.*;
 
+/**
+ * Encapsulates logic for correction declaration by a client user, if the declaration was
+ * previously declined by inspector. Corrected declaration is stored to database under same id.
+ */
 public class CorrectDeclarationCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(CorrectDeclarationCommand.class);
@@ -41,7 +45,7 @@ public class CorrectDeclarationCommand implements Command {
         ClientUser user = (ClientUser) request.getSession().getAttribute(USER);
 
         if (!InputChecker.checkDeclarationDataValidity(request, user, firstName, secondName, income, taxSumDeclared)) {
-            forward(request, response, JspPath.CORRECT_DECLARATION_PAGE);
+            response.sendRedirect(ServletPath.CORRECT_DECLARATION);
             return;
         }
 

@@ -6,7 +6,6 @@
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="web interface"/>
 
-
 <html>
 <head>
     <title>Tax Declaration app - <fmt:message key="label.page.title" /></title>

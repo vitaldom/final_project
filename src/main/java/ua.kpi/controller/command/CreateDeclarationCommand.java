@@ -17,6 +17,9 @@ import static ua.kpi.controller.TextConstants.*;
 
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
 
+/**
+ * Encapsulates logic for creation of a new declaration.
+ */
 public class CreateDeclarationCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(CreateDeclarationCommand.class);
@@ -41,7 +44,7 @@ public class CreateDeclarationCommand implements Command {
         ClientUser user = (ClientUser) request.getSession().getAttribute(USER);
 
         if (!InputChecker.checkDeclarationDataValidity(request, user, firstName, secondName, income, taxSumDeclared)) {
-            forward(request, response, JspPath.NEW_DECLARATION_PAGE);
+            response.sendRedirect(ServletPath.NEW_DECLARATION);
             return;
         }
 
@@ -51,7 +54,7 @@ public class CreateDeclarationCommand implements Command {
                 .income(Long.parseLong(income)).taxSumDeclared(Long.parseLong(taxSumDeclared))
                 .status(Declaration.Status.valueOf(SUBMITTED)).build(); //TODO consider revising enum/String usage of Status
 
-        LOGGER.debug("New declaration object created: {} ", declaration.toString());
+        LOGGER.debug("New declaration object created: {} ", declaration);
 
         boolean tmp = declarationService.create(declaration); //TODO consider use of tmp
 

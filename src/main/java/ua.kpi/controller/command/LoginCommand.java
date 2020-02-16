@@ -16,7 +16,9 @@ import java.util.*;
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
 import static ua.kpi.controller.TextConstants.*;
 
-
+/**
+ * Encapsulates login logic.
+ */
 public class LoginCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);

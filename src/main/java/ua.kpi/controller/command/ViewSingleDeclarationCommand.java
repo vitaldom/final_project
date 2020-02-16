@@ -13,6 +13,9 @@ import java.util.ArrayList;
 
 import static ua.kpi.controller.TextConstants.*;
 
+/**
+ * Renders page for client user to view a single submitted declaration.
+ */
 public class ViewSingleDeclarationCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(ViewSingleDeclarationCommand.class);

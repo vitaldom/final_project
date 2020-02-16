@@ -16,6 +16,10 @@ import java.util.Set;
 
 import static ua.kpi.controller.TextConstants.USER;
 
+/**
+ * Allows access to application resources to only registered users.
+ * Start and registration pages are open for unregistered users.
+ */
 @WebFilter("/*")
 public class AuthorizationFilter implements Filter {
 

@@ -16,19 +16,17 @@ public class JdbcAbstractUserDao implements UserDao {
     private static final String COUNT = "count";
     private static final Logger LOGGER = LogManager.getLogger(JdbcAbstractUserDao.class);
 
-    AbstractUserMapper userMapper = new AbstractUserMapper(); //TODO consider generic version to add inspector
+    AbstractUserMapper userMapper = new AbstractUserMapper();
     Connection connection;
 
     public JdbcAbstractUserDao(Connection connection) {
         this.connection = connection;
     }
 
-
-
     @Override
     public boolean create(AbstractAppUser user) {
 
-        try(PreparedStatement ps1 = connection.prepareStatement(PRE_CHECK_CREATION_USER)) { //TODO change name for pstm1
+        try(PreparedStatement ps1 = connection.prepareStatement(PRE_CHECK_CREATION_USER)) {
             connection.setAutoCommit(false);
             connection.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
             ps1.setString(1, user.getLogin());
@@ -57,11 +55,6 @@ public class JdbcAbstractUserDao implements UserDao {
                         exception.printStackTrace();
                     }
                 }
-//                else {
-//                    LOGGER.error("New user registration failed because login already exists : {}", user.getLogin());
-//                    throw new LoginExistsException("Login already exists: " + user.getLogin());
-//                }
-
             }
         } catch (SQLException exception) {
             LOGGER.error("SQL error when adding new user {} ", user);
@@ -72,7 +65,6 @@ public class JdbcAbstractUserDao implements UserDao {
 
     @Override
     public AbstractAppUser find(String login, String password) {
-        //Map<Integer, User> users = new HashMap<>(); TODO+
 
         try(PreparedStatement ps = connection.prepareStatement(FIND_USER)) {
 
@@ -82,7 +74,6 @@ public class JdbcAbstractUserDao implements UserDao {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) { //TODO+ duplicate values possible?
                 AbstractAppUser user = userMapper.extractFromResultSet(rs);
-                //user = userMapper.makeUnique(users, user); TODO+ validate use
                 return user;
             }
         } catch (SQLException exception) {

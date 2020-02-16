@@ -1,5 +1,8 @@
 package ua.kpi.model.entities;
 
+/**
+ * Represents inspector users of the application, who can check (approve or decline) submitted declarations.
+ */
 public class InspectorUser extends AbstractAppUser {
     public InspectorUser(String firstName, String secondName, String login, String password) {
 
@@ -7,7 +10,7 @@ public class InspectorUser extends AbstractAppUser {
         setSecondName(secondName);
         setLogin(login);
         setPassword(password);
-        setRole("INSPECTOR"); //TODO consider changing to a constant
+        setRole(Role.INSPECTOR.toString());
     }
 
     public static class Builder extends AbstractAppUser.Builder<Builder> {

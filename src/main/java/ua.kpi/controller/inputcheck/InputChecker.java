@@ -1,6 +1,8 @@
 package ua.kpi.controller.inputcheck;
 
 import ua.kpi.model.entities.ClientUser;
+import ua.kpi.model.exceptions.LoginExistsException;
+import ua.kpi.model.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ResourceBundle;
@@ -8,12 +10,17 @@ import java.util.ResourceBundle;
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
 import static ua.kpi.controller.TextConstants.*;
 
+/**
+ * Contains utility methods for check of users' input.
+ */
 public class InputChecker {
 
     private static final String NAME_REGEX_UA = "^[А-ЩЬЮЯҐІЇЄ][а-щьюяґіїє']{1,20}$";
     private static final String NAME_REGEX_EN = "^[A-Z][a-z]{1,20}$";
     private static final String LOGIN_REGEX ="^[\\w-.]{3,20}$";
     private static final String PASSWORD_REGEX = "^[\\w\\W]{4,20}$";
+
+    static UserService userService = new UserService();
 
     public static boolean nameIsValid(String name, String userLanguage) {
         if (!allNotNull(name, userLanguage)) {
@@ -45,23 +52,57 @@ public class InputChecker {
                                                        String secondName, String income, String taxSumDeclared) {
 
         if (!firstName.equals(user.getFirstName())) {
-            setErrorMessage(request,"new.declaration.error.first.name");
+            setSessionErrorMessage(request,"new.declaration.error.first.name");
             return false;
         }
 
         if (!secondName.equals(user.getSecondName())) {
-            setErrorMessage(request,"new.declaration.error.second.name");
+            setSessionErrorMessage(request,"new.declaration.error.second.name");
             return false;
         }
         //TODO consider check for declaration Year to avoid duplicates
 
-        if (!InputChecker.longIsValid(income)) {
-            setErrorMessage(request,"new.declaration.error.income");
+        if (!longIsValid(income)) {
+            setSessionErrorMessage(request,"new.declaration.error.income");
             return false;
         }
 
-        if (!InputChecker.longIsValid(taxSumDeclared)) {
-            setErrorMessage(request,"new.declaration.error.sum.declared");
+        if (!longIsValid(taxSumDeclared)) {
+            setSessionErrorMessage(request,"new.declaration.error.sum.declared");
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean checkUserRegistrationData(HttpServletRequest request, String firstName, String secondName,
+                                                    String login, String password) throws LoginExistsException {
+
+        String userLanguage = (String) request.getSession().getAttribute(SESSION_LANGUAGE);
+
+        if(!nameIsValid(firstName, userLanguage)) {
+            setSessionErrorMessage(request, "registration.invalid.first.name");
+            return false;
+        }
+
+        if(!nameIsValid(secondName, userLanguage)) {
+            setSessionErrorMessage(request,"registration.invalid.second.name");
+            return false;
+        }
+
+        if(!loginIsValid(login)) {
+            setSessionErrorMessage(request,"registration.invalid.login");
+            return false;
+        }
+
+        if (userService.findClientByLogin(login) != null) {
+            setSessionErrorMessage(request,"registration.login.already.exists");
+
+            throw new LoginExistsException("New user registration failed, because login '" +login + "'already exists" );
+        }
+
+        if(!passwordIsValid(password)) {
+            setSessionErrorMessage(request,"registration.invalid.password");
             return false;
         }
 

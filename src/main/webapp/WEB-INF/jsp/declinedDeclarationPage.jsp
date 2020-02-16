@@ -1,4 +1,5 @@
-<%@ include file="../includes/lang_change_block.jsp"%>
+<%@ include file="../includes/languageChangeBlock.jsp"%>
+<%@ include file="../includes/logoutButton.jsp"%>
 
 <html>
 <head>
@@ -18,7 +19,8 @@
 <form class="form" method="post" action="${pageContext.request.contextPath}/correctDeclaration">
 
     <table border="0">
-<%--        <p style='color: red;'>${error_message}</p>--%>
+        <p style='color: red;'>${error_message}</p>
+        <c:remove var="error_message" scope="session" />
         <tr style="background-color: #dadada; height: 30px;">
             <th style="min-width: 150px;"><fmt:message key="correct.declaration.field.name" /></th>
             <th style="min-width: 150px;"><fmt:message key="correct.declaration.new.data" /></th>

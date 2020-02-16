@@ -16,6 +16,9 @@ import java.util.Set;
 import static ua.kpi.controller.TextConstants.LOGGED_USERS;
 import static ua.kpi.controller.TextConstants.USER;
 
+/**
+ * Encapsulates logout logic.
+ */
 public class LogoutCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(LogoutCommand.class);

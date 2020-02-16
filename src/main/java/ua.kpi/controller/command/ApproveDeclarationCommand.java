@@ -16,6 +16,10 @@ import java.util.ResourceBundle;
 import static ua.kpi.controller.TextConstants.DECLARATION_TO_PROCEED;
 import static ua.kpi.controller.TextConstants.SERVICE_MESSAGE;
 
+/**
+ * Invoked when inspector approves a client's declaration. Declaration is stored in database with option for the client
+ * to view it (no options for change).
+ */
 public class ApproveDeclarationCommand implements Command {
 
         private static final Logger LOGGER = LogManager.getLogger(ApproveDeclarationCommand.class);

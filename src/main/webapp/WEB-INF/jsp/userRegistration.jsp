@@ -1,4 +1,4 @@
-<%@ include file="../includes/lang_change_block.jsp"%>
+<%@ include file="../includes/languageChangeBlock.jsp"%>
 
 <html>
 <head>

@@ -13,6 +13,9 @@ import java.util.ArrayList;
 
 import static ua.kpi.controller.TextConstants.*;
 
+/**
+ * Encapsulates logic for inspector user to proceed with check of the chosen declaration.
+ */
 public class CheckDeclarationCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(CheckDeclarationCommand.class);

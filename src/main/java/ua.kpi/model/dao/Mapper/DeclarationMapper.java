@@ -12,6 +12,7 @@ import java.sql.SQLException;
 public class DeclarationMapper implements Mapper<Declaration> {
 
     private static final Logger LOGGER = LogManager.getLogger(DeclarationMapper.class);
+    private static final String YEAR_ = "YEAR_";
 
     @Override
     public Declaration extractFromResultSet(ResultSet rs) throws SQLException {
@@ -22,7 +23,7 @@ public class DeclarationMapper implements Mapper<Declaration> {
 
         Declaration declaration = new Declaration.Builder()                         //Setting fields, defined in Builder
                 .authorLogin(rs.getString(DeclarationSqlColumns.AUTHOR_LOGIN))
-                .declarationYear(Declaration.DeclarationYear.valueOf("YEAR_" +
+                .declarationYear(Declaration.DeclarationYear.valueOf(YEAR_ +
                         (rs.getString(DeclarationSqlColumns.DECLARATION_YEAR))))
                 .taxCategory(Declaration.TaxCategory.valueOf
                         (rs.getString(DeclarationSqlColumns.TAX_CATEGORY)))

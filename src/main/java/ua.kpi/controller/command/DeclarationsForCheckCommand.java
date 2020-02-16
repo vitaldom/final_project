@@ -16,6 +16,9 @@ import java.util.List;
 import static ua.kpi.controller.TextConstants.DECLARATION_LIST;
 import static ua.kpi.controller.TextConstants.USER;
 
+/**
+ * Renders list of declaration, assigned to the logged-in inspector, to a jsp page.
+ */
 public class DeclarationsForCheckCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(DeclarationsForCheckCommand.class);

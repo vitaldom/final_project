@@ -17,6 +17,11 @@ import java.io.IOException;
 
 import static ua.kpi.controller.TextConstants.DECLARATION_TO_SHOW;
 
+/**
+ * Invoked when client user chooses to send request for inspector change. This option becomes available
+ * if the declaration had been previously declined by inspector. Declaration stays available for the client for view
+ * (but not correction). New inspector change request is stored to database.
+ */
 public class InspectorChangeCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(InspectorChangeCommand.class);

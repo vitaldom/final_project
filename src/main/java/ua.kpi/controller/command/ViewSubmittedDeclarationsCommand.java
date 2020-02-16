@@ -16,6 +16,9 @@ import java.util.List;
 import static ua.kpi.controller.TextConstants.DECLARATION_LIST;
 import static ua.kpi.controller.TextConstants.USER;
 
+/**
+ * Renders page for client user to view a list of all submitted declarations.
+ */
 public class ViewSubmittedDeclarationsCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger(ViewSubmittedDeclarationsCommand.class);

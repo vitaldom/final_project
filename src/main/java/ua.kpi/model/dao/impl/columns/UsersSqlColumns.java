@@ -7,8 +7,6 @@ public final class UsersSqlColumns {
         public static final String LOGIN = "login";
         public static final String PASSWORD = "password";
         public static final String ROLE = "role";
-
         public static final String REPORTS_ASSIGNED = "reports_assigned";
-
         public static final String ID = "user_id";
 }

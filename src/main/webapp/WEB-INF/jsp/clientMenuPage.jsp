@@ -1,4 +1,5 @@
-<%@ include file="../includes/lang_change_block.jsp"%>
+<%@ include file="../includes/languageChangeBlock.jsp"%>
+<%@ include file="../includes/logoutButton.jsp"%>
 
 <html>
 <head>

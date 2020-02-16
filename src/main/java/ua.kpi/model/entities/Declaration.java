@@ -1,5 +1,9 @@
 package ua.kpi.model.entities;
 
+/**
+ * Represents tax declaration. Can be created by client user, checked (declined or approved) by inspector user,
+ * corrected by client if declined by inspector.
+ */
 public class Declaration {
                                                 //Parameters assigned at construction
     private ClientUser author;
@@ -226,7 +230,7 @@ public class Declaration {
                 "\nincome: " + getIncome() +
                 "\ntaxSumDeclared: " + getTaxSumDeclared() +
                 "\nstatus: " + getStatus().toString() +
-                "\ncorrectionMessage" + getCorrectionMessage(); //TODO consider returning inspector
+                "\ncorrectionMessage" + getCorrectionMessage();
     }
 }
 

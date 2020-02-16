@@ -5,6 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Interface for implementation by all Commands.
+ */
 public interface Command {
     void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
