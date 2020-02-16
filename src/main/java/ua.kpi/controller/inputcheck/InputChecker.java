@@ -60,7 +60,6 @@ public class InputChecker {
             setSessionErrorMessage(request,"new.declaration.error.second.name");
             return false;
         }
-        //TODO consider check for declaration Year to avoid duplicates
 
         if (!longIsValid(income)) {
             setSessionErrorMessage(request,"new.declaration.error.income");

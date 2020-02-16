@@ -9,7 +9,7 @@ abstract public class AbstractAppUser {
     private String secondName;
     private String login;
     private String password;
-    private Role role; //TODO add id
+    private Role role;
 
     public enum Role {
         CLIENT, INSPECTOR

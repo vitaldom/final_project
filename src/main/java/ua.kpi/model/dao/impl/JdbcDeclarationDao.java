@@ -35,7 +35,7 @@ public class JdbcDeclarationDao implements DeclarationDao {
             assignInspector(declaration);
 
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) { //TODO check necessary?
+            if (rs.next()) {
 
                 int id = rs.getInt(MAX_ID);
                 declaration.setId(++id);
@@ -76,9 +76,9 @@ public class JdbcDeclarationDao implements DeclarationDao {
                 String inspectorLogin = rs.getString(LOGIN);
                 declaration.setInspectorLogin(inspectorLogin);
 
-                PreparedStatement ps2 = connection.prepareStatement(INCREMENT_REPORTS_ASSIGNED); //TODO Combine in one request?
+                PreparedStatement ps2 = connection.prepareStatement(INCREMENT_REPORTS_ASSIGNED);
                 ps2.setString(1, inspectorLogin);
-                ps2.executeUpdate(); //TODO Any additional checks needed?
+                ps2.executeUpdate();
                 ps2.close();
             }
         } catch (SQLException exception) {
@@ -189,7 +189,7 @@ public class JdbcDeclarationDao implements DeclarationDao {
             connection.close();
         } catch (SQLException exception) {
             LOGGER.error(exception.getMessage());
-            throw new RuntimeException(exception); //TODO validate throwing runtime exception
+            throw new RuntimeException(exception);
         }
     }
 }

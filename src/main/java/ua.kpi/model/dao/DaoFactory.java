@@ -17,5 +17,5 @@ public abstract class DaoFactory {
 	}
 
 	protected DaoFactory() {
-	};
+	}
 }

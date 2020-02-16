@@ -36,7 +36,7 @@ public class CreateDeclarationCommand implements Command {
         String income = request.getParameter(INCOME);
         String taxSumDeclared = request.getParameter(TAX_SUM_DECLARED);
 
-        if (!allNotNull(firstName, secondName, declarationYear, taxCategory, income, taxSumDeclared)) { //TODO add error message
+        if (!allNotNull(firstName, secondName, declarationYear, taxCategory, income, taxSumDeclared)) {
             forward(request, response, JspPath.NEW_DECLARATION_PAGE);
             return;
         }
@@ -52,14 +52,13 @@ public class CreateDeclarationCommand implements Command {
                 .declarationYear(Declaration.DeclarationYear.valueOf(YEAR_ + declarationYear))
                 .taxCategory(Declaration.TaxCategory.valueOf(taxCategory.toUpperCase()))
                 .income(Long.parseLong(income)).taxSumDeclared(Long.parseLong(taxSumDeclared))
-                .status(Declaration.Status.valueOf(SUBMITTED)).build(); //TODO consider revising enum/String usage of Status
+                .status(Declaration.Status.valueOf(SUBMITTED)).build();
 
         LOGGER.debug("New declaration object created: {} ", declaration);
 
-        boolean tmp = declarationService.create(declaration); //TODO consider use of tmp
+        boolean tmp = declarationService.create(declaration);
 
         LOGGER.debug("New declaration written to database, value of tmp: {} ", tmp);
-                                                                        //TODO consider check for actual insert into DB
 
         if (tmp) {
              InputChecker.setServiceMessage(request, "new.declaration.successful.submission");
@@ -68,6 +67,6 @@ public class CreateDeclarationCommand implements Command {
              return;
         }
 
-        forward(request, response, JspPath.CLIENT_MENU_PAGE); // TODO test if this forward ever happens
+        forward(request, response, JspPath.CLIENT_MENU_PAGE);
     }
 }

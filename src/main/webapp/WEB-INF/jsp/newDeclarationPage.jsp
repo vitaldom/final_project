@@ -24,10 +24,6 @@
             <td><label for="secondName"><fmt:message key="registration.second.name" />:</label></td>
             <td><input required type="text" id="secondName" name="secondName" value= "${sessionScope.user.secondName}"/> </td>
         </tr>
-<%--        <tr>--%>
-<%--            <td><label for="personalTaxNumber"><fmt:message key="new.report.tax.number" />:</label></td>--%>
-<%--            <td><input required type="number" id="personalTaxNumber" name="personalTaxNumber" value= ""/> </td>--%>
-<%--        </tr> TODO--%>
         <tr>
             <td><label for="declarationYear"><fmt:message key="new.declaration.declaration.year" />:</label></td>
             <td><select required id="declarationYear" name="declarationYear">
@@ -55,11 +51,6 @@
         </tr>
         <tr>
             <td><label for="taxSumDeclared"><fmt:message key="new.declaration.tax.sum.declared" />:</label></td>
-<%--            <p>Simple value of taxCategory variable: <c:out value="${taxCategory}"/></p> TODO add browser calculation--%>
-<%--            <p>Value of taxCategory variable via param: <c:out value="${param.taxCategory}"/></p>--%>
-<%--            <c:set var="taxRate" value="${taxCategory eq 'prefrential' ? 0.9 : taxCategory eq 'employee' ? 0.8 : 0.7 }"/>--%>
-<%--            <p>value of taxRate variable: <c:out value="${taxRate}"/></p>--%>
-<%--            <p>value of expectedTax variable: <c:set var="expectedTax" value="${taxRate * income}"/></p>--%>
             <td><input required type="number" id="taxSumDeclared" name="taxSumDeclared" value=""/> </td>
         </tr>
         <tr>

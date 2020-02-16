@@ -47,7 +47,7 @@ CREATE TABLE `declarations` (
 
 LOCK TABLES `declarations` WRITE;
 /*!40000 ALTER TABLE `declarations` DISABLE KEYS */;
-INSERT INTO `declarations` VALUES (1,'john','sidr','2020','EMPLOYEE',1000,100,'SUBMITTED',NULL),(2,'john','ivan','2017','PREFERENTIAL',1000000,333,'UNDER_CORRECTION','test'),(3,'boroda','ivan','2019','EMPLOYEE',42984824,42424,'APPEALED','test'),(4,'boroda','ivan','2020','ENTREPRENEUR',48248287874327,42424,'APPEALED','test'),(5,'boroda','ivan','2019','PREFERENTIAL',438729874827,3141423,'APPROVED','тест'),(6,'john','ivan','2020','PREFERENTIAL',300000,2000,'SUBMITTED',NULL),(7,'boroda','ivan','2019','ENTREPRENEUR',400000,2000,'SUBMITTED',NULL),(8,'boroda','ivan','2015','PREFERENTIAL',3000000,10000,'SUBMITTED',NULL),(9,'boroda','petr','2016','PREFERENTIAL',400043,20000,'SUBMITTED','Too bad'),(10,'boroda','ivan','2017','EMPLOYEE',5000000,20000,'APPROVED',NULL),(11,'boroda','petr','2015','EMPLOYEE',2000,200,'APPROVED','Year should be 2015'),(12,'boroda','ivan','2017','PREFERENTIAL',4234243,424,'SUBMITTED',NULL);
+INSERT INTO `declarations` VALUES (1,'john','sidr','2020','EMPLOYEE',1000,100,'SUBMITTED',NULL),(2,'john','ivan','2017','PREFERENTIAL',1000000,333,'SUBMITTED','Too high income'),(3,'boroda','ivan','2019','EMPLOYEE',42984824,42424,'APPEALED','Вказані не всі доходи'),(4,'boroda','ivan','2020','ENTREPRENEUR',48248287874327,42424,'APPEALED','Занижена сума податку'),(6,'john','ivan','2020','PREFERENTIAL',300000,2000,'APPROVED',NULL),(7,'boroda','ivan','2015','PREFERENTIAL',29349389,300000,'APPROVED','Занижена сума податку'),(8,'boroda','ivan','2016','PREFERENTIAL',8429874892,42342,'SUBMITTED',NULL),(9,'boroda','ivan','2015','EMPLOYEE',200000,2000,'UNDER_CORRECTION','Невірна сума доходу');
 /*!40000 ALTER TABLE `declarations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +80,7 @@ CREATE TABLE `inspector_change_requests` (
 
 LOCK TABLES `inspector_change_requests` WRITE;
 /*!40000 ALTER TABLE `inspector_change_requests` DISABLE KEYS */;
-INSERT INTO `inspector_change_requests` VALUES (1,3,'boroda','ivan','test reason'),(2,4,'boroda','ivan','test');
+INSERT INTO `inspector_change_requests` VALUES (1,3,'boroda','ivan','test reason'),(2,4,'boroda','ivan','Погане обслуговування');
 /*!40000 ALTER TABLE `inspector_change_requests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +102,7 @@ CREATE TABLE `users` (
                          PRIMARY KEY (`id`),
                          UNIQUE KEY `login_UNIQUE` (`login`),
                          UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +111,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (17,'Snow','John','john','1234','CLIENT',NULL),(18,'Ivanov','Ivan','ivan','1234','INSPECTOR',14),(19,'Бородова','Наталія','boroda','1234','CLIENT',NULL),(20,'Pupkin','Vasia','vasia','1234','CLIENT',NULL),(21,'Кононученко','Анатолій','anar','1234','CLIENT',NULL),(22,'Sidorov','Sidr','sidr','1234','INSPECTOR',33),(24,'Petrov','Petr','petr','1234','INSPECTOR',13),(25,'Антонов','Антон','anton','1234','CLIENT',NULL);
+INSERT INTO `users` VALUES (17,'Snow','John','john','1234','CLIENT',NULL),(18,'Ivanov','Ivan','ivan','1234','INSPECTOR',4),(19,'Бородова','Наталія','boroda','1234','CLIENT',NULL),(20,'Pupkin','Vasia','vasia','1234','CLIENT',NULL),(21,'Кононученко','Анатолій','anar','1234','CLIENT',NULL),(22,'Sidorov','Sidr','sidr','1234','INSPECTOR',33),(24,'Petrov','Petr','petr','1234','INSPECTOR',20),(25,'Антонов','Антон','anton','1234','CLIENT',NULL),(26,'Streizand','Barbara','barbara','1234','CLIENT',NULL),(27,'Шиндлер','Адам','adam','1234','CLIENT',NULL),(29,'Монтана','Монт','mont','1234','CLIENT',NULL),(30,'Test','Test','login','1111','CLIENT',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -124,4 +124,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-07  9:33:42
+-- Dump completed on 2020-02-16 23:05:42

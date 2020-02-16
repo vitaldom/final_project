@@ -27,7 +27,7 @@ public class CheckDeclarationCommand implements Command {
             forward(request, response, JspPath.CHECK_DECLARATION_PAGE);
         }
 
-        int index = Integer.parseInt(request.getParameter(DECLARATION_INDEX_IN_ARRAY)); //TODO add checks for these operations.
+        int index = Integer.parseInt(request.getParameter(DECLARATION_INDEX_IN_ARRAY));
         ArrayList<Declaration> declarationList =
                 (ArrayList<Declaration>) request.getSession().getAttribute(DECLARATION_LIST);
         Declaration declarationToProceed = declarationList.get(index);

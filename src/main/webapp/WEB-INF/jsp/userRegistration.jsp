@@ -13,7 +13,6 @@
 <form class="form" method="post" action="${pageContext.request.contextPath}/registration">
 
     <table border="0">
-<%--        <p style='color: red;'>${error_message}</p>--%>
         <p style="color:red; font-weight: 700;">${error_message}</p>
         <c:remove var="error_message" scope="session" />
 

@@ -32,7 +32,7 @@ public class JdbcInspectorChangeRequestDao implements InspectorChangeRequestDao 
             connection.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
 
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) { //TODO check necessary?
+            if (rs.next()) {
 
                 int id = rs.getInt(MAX_ID);
                 inspectorChangeRequest.setId(++id);
@@ -54,7 +54,7 @@ public class JdbcInspectorChangeRequestDao implements InspectorChangeRequestDao 
                         LOGGER.error("SQL error creating new inspector change request {} ", exception.getMessage());
                     }
                     finally {
-                        connection.setAutoCommit(true); //TODO Validate necessity of setting AutoCommit
+                        connection.setAutoCommit(true);
                     }
             }
         } catch (SQLException exception) {
@@ -69,7 +69,7 @@ public class JdbcInspectorChangeRequestDao implements InspectorChangeRequestDao 
             connection.close();
         } catch (SQLException exception) {
             LOGGER.error(exception.getMessage());
-            throw new RuntimeException(exception); //TODO validate throwing runtime exception
+            throw new RuntimeException(exception);
         }
     }
 }

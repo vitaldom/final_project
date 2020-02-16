@@ -35,7 +35,6 @@ public class ApproveDeclarationCommand implements Command {
             LOGGER.trace("Declaration to be approved in ApproveDeclarationCommand: {}", declaration);
 
             declarationService.changeStatus(declaration.getId(), Declaration.Status.APPROVED.toString());
-                                                                                //TODO consider adding checks/ try-catch
 
             ResourceBundle webInterface = ResourceBundleDispatcher.getResourceBundle(request);
             request.getSession().setAttribute(SERVICE_MESSAGE,

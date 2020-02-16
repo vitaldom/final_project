@@ -10,7 +10,7 @@ public class ClientUser extends AbstractAppUser {
         setFirstName(firstName);
         setSecondName(secondName);
         setLogin(login);
-        setPassword(password); //TODO add personal tax number
+        setPassword(password);
         setRole(Role.CLIENT.toString());
     }
 

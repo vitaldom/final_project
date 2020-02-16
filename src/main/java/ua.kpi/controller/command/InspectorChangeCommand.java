@@ -35,7 +35,7 @@ public class InspectorChangeCommand implements Command {
 
         String inspectorChangeComment = request.getParameter(INSPECTOR_CHANGE_COMMENT);
 
-        if (inspectorChangeComment == null || inspectorChangeComment.equals("")) { //TODO add error message
+        if (inspectorChangeComment == null || inspectorChangeComment.equals("")) {
             forward(request, response, JspPath.CORRECT_DECLARATION_PAGE);
             return;
         }
@@ -45,13 +45,11 @@ public class InspectorChangeCommand implements Command {
         InspectorChangeRequest inspectorChangeRequest
                 = new InspectorChangeRequest(appealedDeclaration, inspectorChangeComment);
 
-        boolean tmp = inspectorChangeRequestService.create(inspectorChangeRequest); //TODO consider use of tmp
+        boolean tmp = inspectorChangeRequestService.create(inspectorChangeRequest);
 
         LOGGER.debug("New new inspector change request written to database, value of tmp: {} ", tmp);
-        //TODO consider check for actual insert into DB
 
         declarationService.changeStatus(appealedDeclaration.getId(), Declaration.Status.APPEALED.toString());
-        //TODO Combine both database requests into transaction?
 
         if (tmp) {
              InputChecker.setServiceMessage(request, "new.inspector.change.request.successful.submission");
@@ -60,6 +58,6 @@ public class InspectorChangeCommand implements Command {
              return;
         }
 
-        forward(request, response, JspPath.CLIENT_MENU_PAGE); // TODO test if this forward ever happens. Add error message?
+        forward(request, response, JspPath.CLIENT_MENU_PAGE);
     }
 }

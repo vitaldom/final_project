@@ -46,12 +46,12 @@ public class JdbcAbstractUserDao implements UserDao {
                         ps.executeUpdate();
                         connection.commit();
 
-                        LOGGER.debug("New user committed to the database"); //TODO
+                        LOGGER.debug("New user committed to the database");
                         return true;
 
                     } catch (SQLException exception) {
                         connection.rollback();
-                        LOGGER.error(exception.getMessage()); //TODO
+                        LOGGER.error(exception.getMessage());
                         exception.printStackTrace();
                     }
                 }
@@ -72,7 +72,7 @@ public class JdbcAbstractUserDao implements UserDao {
             ps.setString(2, password);
 
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) { //TODO+ duplicate values possible?
+            while (rs.next()) {
                 AbstractAppUser user = userMapper.extractFromResultSet(rs);
                 return user;
             }
@@ -91,7 +91,7 @@ public class JdbcAbstractUserDao implements UserDao {
             ps.setString(1, login);
 
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) { //TODO+ duplicate values possible?
+            while (rs.next()) {
                 ClientUser user = (ClientUser) userMapper.extractFromResultSet(rs);
                 return user;
             }
@@ -108,7 +108,7 @@ public class JdbcAbstractUserDao implements UserDao {
             connection.close();
         } catch (SQLException e) {
             LOGGER.error("Error closing database connection {}", e.getMessage());
-            throw new RuntimeException(e); //TODO validate throwing runtime exception
+            throw new RuntimeException(e);
         }
     }
 }

@@ -31,14 +31,14 @@ public class DeclineDeclarationCommand implements Command {
         Declaration declaration = (Declaration) request.getSession().getAttribute(DECLARATION_TO_PROCEED);
         String declineMessage = request.getParameter(DECLINE_MESSAGE);
 
-        if (declineMessage == null) { //TODO check if this null, or empty string
+        if (declineMessage == null) {
 
             InputChecker.setSessionErrorMessage(request, "check.declaration.no.decline.message");
             response.sendRedirect(ServletPath.CHECK_DECLARATION);
             return;
         }
 
-        declarationService.decline(declaration.getId(), declineMessage); //TODO consider adding checks/ try-catch
+        declarationService.decline(declaration.getId(), declineMessage);
 
         InputChecker.setServiceMessage(request, "check.declaration.successful.decline");
         response.sendRedirect(ServletPath.VIEW_DECLARATIONS_FOR_CHECK);

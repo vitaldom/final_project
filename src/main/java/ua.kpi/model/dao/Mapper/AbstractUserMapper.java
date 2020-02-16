@@ -15,7 +15,7 @@ public class AbstractUserMapper implements Mapper<AbstractAppUser> {
 
         String role = rs.getString(UsersSqlColumns.ROLE);
 
-        if (role == null) { // TODO consider returning non-null value. Check if null is possible
+        if (role == null) {
             return null;
         }
 
@@ -29,8 +29,8 @@ public class AbstractUserMapper implements Mapper<AbstractAppUser> {
                     .build();
         }
 
-        else {  //role = "INSPECTOR"                                            //TODO Check ways to avoid duplication
-                                                                                //TODO returning Abstract app user is a good practice?
+        else {  //role = "INSPECTOR"
+
             return new InspectorUser.Builder()
                     .firstName(rs.getString(UsersSqlColumns.FIRST_NAME))
                     .secondName(rs.getString(UsersSqlColumns.SECOND_NAME))

@@ -17,7 +17,7 @@ public class DeclarationMapper implements Mapper<Declaration> {
     @Override
     public Declaration extractFromResultSet(ResultSet rs) throws SQLException {
 
-        if (rs.getString(DeclarationSqlColumns.ID) == null) { // TODO consider returning non-null value. Possible to avoid the check?
+        if (rs.getString(DeclarationSqlColumns.ID) == null) {
             return null;
         }
 
@@ -34,11 +34,11 @@ public class DeclarationMapper implements Mapper<Declaration> {
 
         UserService userService = new UserService();
                                                                                                 //Setting rest of fields
-        declaration.setAuthor(userService.findClientByLogin(declaration.getAuthorLogin())); //TODO check for universal solution
+        declaration.setAuthor(userService.findClientByLogin(declaration.getAuthorLogin()));
         declaration.setId(rs.getInt(DeclarationSqlColumns.ID));
         declaration.setInspectorLogin(rs.getString(DeclarationSqlColumns.INSPECTOR_LOGIN));
         declaration.setCorrectionMessage(rs.getString(DeclarationSqlColumns.CORRECTION_MESSAGE));
-        //TODO set author and inspector object references?
+
 
         LOGGER.info("New declaration object recreated from database via Mapper (id, author login): {}{}",
                 declaration.getId(), declaration.getAuthorLogin());

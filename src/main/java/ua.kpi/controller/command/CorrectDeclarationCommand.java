@@ -59,10 +59,9 @@ public class CorrectDeclarationCommand implements Command {
 
         LOGGER.debug("Declaration object updated(corrected): {} ", correctedDeclaration);
 
-        boolean tmp = declarationService.correct(correctedDeclaration); //TODO consider use of tmp
+        boolean tmp = declarationService.correct(correctedDeclaration);
 
         LOGGER.debug("Corrected declaration written to database, value of tmp: {} ", tmp);
-                                                                        //TODO consider check for actual insert into DB
 
         if(tmp) {
              InputChecker.setServiceMessage(request, "correct.declaration.successful.submission");
@@ -71,6 +70,6 @@ public class CorrectDeclarationCommand implements Command {
              return;
         }
 
-        forward(request, response, JspPath.CLIENT_MENU_PAGE); // TODO test if this forward ever happens
+        forward(request, response, JspPath.CLIENT_MENU_PAGE);
     }
 }

@@ -9,7 +9,7 @@ import java.sql.Connection;
 
 public class JdbcDaoFactory extends DaoFactory {
 
-    private ConnectionPool connectionPool = new ConnectionPool(); //TODO rework into singleton
+    private ConnectionPool connectionPool = new ConnectionPool();
 
     @Override
     public UserDao createUserDao() {
